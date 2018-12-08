@@ -14,6 +14,7 @@ final class FederatedTimelineViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.refreshControl = {
             let refreshControl = UIRefreshControl()
             refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
@@ -66,5 +67,15 @@ extension FederatedTimelineViewController: UITableViewDataSource {
         }
         cell.status = statuses[indexPath.row]
         return cell
+    }
+}
+
+extension FederatedTimelineViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let textView = UITextView()
+        textView.text = statuses[indexPath.row].content
+        let viewController = UIViewController()
+        viewController.view = textView
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

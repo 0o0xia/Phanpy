@@ -41,11 +41,15 @@ extension StatusContentParser: XMLParserDelegate {
         attributes attributeDict: [String: String] = [:]
     ) {
         currentElements.append(Element(name: elementName, attributes: attributeDict))
-        if elementName == "p" && output.length > 0 {
+        switch elementName {
+        case "p" where output.length > 0:
             output.append(NSAttributedString(string: "\n\n"))
-        }
-        if elementName == "a" {
+        case "a":
             currentURL = URL(string: attributeDict["href"] ?? "")
+        case "br":
+            output.append(NSAttributedString(string: "\n"))
+        default:
+            break
         }
     }
 
@@ -67,7 +71,7 @@ extension StatusContentParser: XMLParserDelegate {
         }
 
         switch element.name {
-        case "p":
+        case "p", "br":
             output.append(NSAttributedString(string: string, attributes: [
                 .font: UIFont.preferredFont(forTextStyle: .body),
             ]))

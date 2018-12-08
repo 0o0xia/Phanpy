@@ -12,11 +12,16 @@ final class PhanpyTests: XCTestCase {
     func testStatusContentParser() {
         // swiftlint:disable line_length
         let content = """
-            <p>Test, <a href="https://www.apple.com" rel="nofollow noopener" target="_blank"><span class="invisible">https://www.</span><span class="">apple.com</span><span class="invisible"></span></a> Yo.<br /><span class="h-card"><a href="https://mastodon.social/@libei" class="u-url mention">@<span>libei</span></a></span> is a test.</p><p>Yo!</p><p><a href="https://www.apple.com/cn/shop/buy-mac/macbook-air" rel="nofollow noopener" target="_blank"><span class="invisible">https://www.</span><span class="ellipsis">apple.com/cn/shop/buy-mac/macb</span><span class="invisible">ook-air</span></a></p>
+            <p>苏武腿。天苍茫，月迷茫，不知是看词还是看腿。<br>now the full article is here<br>苏武牧羊 (Su Wu Mu Yang)<br><a href="http://xahmusic.org/music/su_wu_mu_yang.html" rel="nofollow noopener" target="_blank"><span class="invisible">http://</span><span class="ellipsis">xahmusic.org/music/su_wu_mu_ya</span><span class="invisible">ng.html</span></a></p>
             """
         // swiftlint:enable line_length
         let parser = StatusContentParser(content: content)
-        print(parser.output.string)
-        print("---")
+        XCTAssertEqual(parser.output.string, """
+            苏武腿。天苍茫，月迷茫，不知是看词还是看腿。
+            now the full article is here
+            苏武牧羊 (Su Wu Mu Yang)
+            xahmusic.org/music/su_wu_mu_ya...
+            """
+        )
     }
 }
