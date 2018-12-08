@@ -1,0 +1,5 @@
+excluded:
+  - Pods
+
+trailing_comma:
+  mandatory_comma: true

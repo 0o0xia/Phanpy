@@ -58,7 +58,12 @@ extension FederatedTimelineViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StatusTableViewCell
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+                as? StatusTableViewCell
+        else {
+            fatalError()
+        }
         cell.status = statuses[indexPath.row]
         return cell
     }
