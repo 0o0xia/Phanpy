@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1574901BD72D7E4110443605 /* Pods_PhanpyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A89DF87305BC13AA759F59 /* Pods_PhanpyTests.framework */; };
 		8CD7BE1C21BBFA1C00C993C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7BE1B21BBFA1C00C993C9 /* AppDelegate.swift */; };
 		8CD7BE2321BBFA1E00C993C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7BE2221BBFA1E00C993C9 /* Assets.xcassets */; };
 		8CD7BE2621BBFA1E00C993C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7BE2421BBFA1E00C993C9 /* LaunchScreen.storyboard */; };
 		8CD7BE3121BBFA1E00C993C9 /* PhanpyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7BE3021BBFA1E00C993C9 /* PhanpyTests.swift */; };
 		8CD7BE3D21BC074800C993C9 /* FederatedTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7BE3B21BC074800C993C9 /* FederatedTimelineViewController.swift */; };
 		8CD7BE3E21BC074800C993C9 /* FederatedTimelineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7BE3C21BC074800C993C9 /* FederatedTimelineViewController.xib */; };
+		F75C6F77CC1FB97C20188F5D /* Pods_Phanpy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A783EADD95F3254958F06902 /* Pods_Phanpy.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +28,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E15F416A441B7DF4B9D3B08 /* Pods-Phanpy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Phanpy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Phanpy/Pods-Phanpy.debug.xcconfig"; sourceTree = "<group>"; };
+		0EFD51135417010AD30C1C8C /* Pods-PhanpyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhanpyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhanpyTests/Pods-PhanpyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		152759A3C7C8DCDA4568429A /* Pods-Phanpy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Phanpy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Phanpy/Pods-Phanpy.release.xcconfig"; sourceTree = "<group>"; };
+		30637E5625B62A342B270E15 /* Pods-PhanpyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhanpyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhanpyTests/Pods-PhanpyTests.release.xcconfig"; sourceTree = "<group>"; };
+		37A89DF87305BC13AA759F59 /* Pods_PhanpyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhanpyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CD7BE1821BBFA1C00C993C9 /* Phanpy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phanpy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CD7BE1B21BBFA1C00C993C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CD7BE2221BBFA1E00C993C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -36,6 +43,7 @@
 		8CD7BE3221BBFA1E00C993C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CD7BE3B21BC074800C993C9 /* FederatedTimelineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FederatedTimelineViewController.swift; sourceTree = "<group>"; };
 		8CD7BE3C21BC074800C993C9 /* FederatedTimelineViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FederatedTimelineViewController.xib; sourceTree = "<group>"; };
+		A783EADD95F3254958F06902 /* Pods_Phanpy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Phanpy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F75C6F77CC1FB97C20188F5D /* Pods_Phanpy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1574901BD72D7E4110443605 /* Pods_PhanpyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +72,8 @@
 				8CD7BE1A21BBFA1C00C993C9 /* Phanpy */,
 				8CD7BE2F21BBFA1E00C993C9 /* PhanpyTests */,
 				8CD7BE1921BBFA1C00C993C9 /* Products */,
+				EF1FB6C28AB81A2B7C964A93 /* Pods */,
+				D44D70FDD3493E2085CC74B4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +108,26 @@
 			path = PhanpyTests;
 			sourceTree = "<group>";
 		};
+		D44D70FDD3493E2085CC74B4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A783EADD95F3254958F06902 /* Pods_Phanpy.framework */,
+				37A89DF87305BC13AA759F59 /* Pods_PhanpyTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF1FB6C28AB81A2B7C964A93 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0E15F416A441B7DF4B9D3B08 /* Pods-Phanpy.debug.xcconfig */,
+				152759A3C7C8DCDA4568429A /* Pods-Phanpy.release.xcconfig */,
+				0EFD51135417010AD30C1C8C /* Pods-PhanpyTests.debug.xcconfig */,
+				30637E5625B62A342B270E15 /* Pods-PhanpyTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,9 +135,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8CD7BE3521BBFA1E00C993C9 /* Build configuration list for PBXNativeTarget "Phanpy" */;
 			buildPhases = (
+				6EBD349A4B3B1C97E4A7B1EB /* [CP] Check Pods Manifest.lock */,
 				8CD7BE1421BBFA1C00C993C9 /* Sources */,
 				8CD7BE1521BBFA1C00C993C9 /* Frameworks */,
 				8CD7BE1621BBFA1C00C993C9 /* Resources */,
+				5B69FD5CE2096200E81E381A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -120,6 +154,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8CD7BE3821BBFA1E00C993C9 /* Build configuration list for PBXNativeTarget "PhanpyTests" */;
 			buildPhases = (
+				098D94E53F80CDF4879E7A8F /* [CP] Check Pods Manifest.lock */,
 				8CD7BE2821BBFA1E00C993C9 /* Sources */,
 				8CD7BE2921BBFA1E00C993C9 /* Frameworks */,
 				8CD7BE2A21BBFA1E00C993C9 /* Resources */,
@@ -190,6 +225,75 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		098D94E53F80CDF4879E7A8F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PhanpyTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B69FD5CE2096200E81E381A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Phanpy/Pods-Phanpy-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MastodonKit/MastodonKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MastodonKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Phanpy/Pods-Phanpy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6EBD349A4B3B1C97E4A7B1EB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Phanpy-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8CD7BE1421BBFA1C00C993C9 /* Sources */ = {
@@ -349,6 +453,7 @@
 		};
 		8CD7BE3621BBFA1E00C993C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E15F416A441B7DF4B9D3B08 /* Pods-Phanpy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -367,6 +472,7 @@
 		};
 		8CD7BE3721BBFA1E00C993C9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 152759A3C7C8DCDA4568429A /* Pods-Phanpy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -385,6 +491,7 @@
 		};
 		8CD7BE3921BBFA1E00C993C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EFD51135417010AD30C1C8C /* Pods-PhanpyTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -406,6 +513,7 @@
 		};
 		8CD7BE3A21BBFA1E00C993C9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30637E5625B62A342B270E15 /* Pods-PhanpyTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
