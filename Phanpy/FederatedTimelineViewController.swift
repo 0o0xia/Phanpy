@@ -15,6 +15,11 @@ final class FederatedTimelineViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = self
+        tableView.refreshControl = {
+            let refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+            return refreshControl
+        }()
         tableView.register(StatusTableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
     }()
@@ -29,6 +34,7 @@ final class FederatedTimelineViewController: UIViewController {
         refresh()
     }
 
+    @objc
     private func refresh() {
         Client(baseURL: "https://mastodon.social").run(Timelines.public()) { result in
             switch result {
@@ -39,6 +45,9 @@ final class FederatedTimelineViewController: UIViewController {
                 }
             case .failure(let error):
                 print(error)
+            }
+            DispatchQueue.main.async {
+                self.tableView.refreshControl?.endRefreshing()
             }
         }
     }
