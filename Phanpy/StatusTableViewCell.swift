@@ -5,6 +5,7 @@
 //  Created by 李孛 on 2018/12/8.
 //
 
+import DateToolsSwift
 import Kingfisher
 import MastodonKit
 import UIKit
@@ -35,6 +36,7 @@ final class StatusTableViewCell: UITableViewCell {
                 ))
                 return attributedString
             }()
+            timeLabel.text = status.createdAt.shortTimeAgoSinceNow
         }
     }
 
@@ -52,11 +54,22 @@ final class StatusTableViewCell: UITableViewCell {
         return label
     }()
 
+    private let timeLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.textColor = .gray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
+        label.setContentHuggingPriority(.required, for: .horizontal)
+        return label
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         contentView.addSubview(avatarImageView)
         contentView.addSubview(nameLabel)
+        contentView.addSubview(timeLabel)
 
         setUpConstraints()
     }
@@ -74,8 +87,12 @@ final class StatusTableViewCell: UITableViewCell {
                 equalToSystemSpacingAfter: avatarImageView.trailingAnchor,
                 multiplier: 1
             ),
-            nameLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
             nameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor),
+        ])
+        NSLayoutConstraint.activate([
+            timeLabel.firstBaselineAnchor.constraint(equalTo: nameLabel.firstBaselineAnchor),
+            timeLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
+            timeLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
         ])
     }
 

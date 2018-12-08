@@ -1,20 +1,24 @@
 PODS:
+  - DateToolsSwift (4.0.0)
   - Kingfisher (5.0.0)
   - MastodonKit (2.0.0)
 
 DEPENDENCIES:
+  - DateToolsSwift (~> 4.0)
   - Kingfisher (~> 5.0)
   - MastodonKit (~> 2.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - DateToolsSwift
     - Kingfisher
     - MastodonKit
 
 SPEC CHECKSUMS:
+  DateToolsSwift: 875d97ff9e3a5d54abdd67a269b3f51c757b71ab
   Kingfisher: 2b0dd651e4fe5a07305b8242fde56f8e2d410f58
   MastodonKit: 3bc591ea7e626dd160711f9a10cd50f192e46ed3
 
-PODFILE CHECKSUM: fe31739f633ce360f858afca0e14a5495a90bd3a
+PODFILE CHECKSUM: 59e52ca46839581a2fec635c1092946c832e9ebb
 
 COCOAPODS: 1.5.3
