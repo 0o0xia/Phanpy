@@ -12,8 +12,16 @@ final class FederatedTimelineViewController: UIViewController {
 
     private var statuses: [Status] = []
 
-    @IBOutlet
-    private var tableView: UITableView!
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.dataSource = self
+        tableView.register(StatusTableViewCell.self, forCellReuseIdentifier: "cell")
+        return tableView
+    }()
+
+    override func loadView() {
+        view = tableView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,8 +50,8 @@ extension FederatedTimelineViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = statuses[indexPath.row].account.displayName
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StatusTableViewCell
+        cell.status = statuses[indexPath.row]
         return cell
     }
 }

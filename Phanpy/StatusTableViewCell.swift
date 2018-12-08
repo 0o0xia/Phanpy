@@ -22,6 +22,8 @@ final class StatusTableViewCell: UITableViewCell {
 
     private let avatarImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 5
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
