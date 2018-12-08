@@ -37,7 +37,7 @@ final class StatusTableViewCell: UITableViewCell {
                 return attributedString
             }()
             timeLabel.text = status.createdAt.shortTimeAgoSinceNow
-            contentTextView.text = StatusContentParser(content: status.content).output.string
+            contentTextView.attributedText = StatusContentParser(content: status.content).output
         }
     }
 
@@ -60,7 +60,6 @@ final class StatusTableViewCell: UITableViewCell {
 
     private let contentTextView: UITextView = {
         let textView = UITextView()
-        textView.font = .preferredFont(forTextStyle: .body)
         textView.isScrollEnabled = false
         textView.isEditable = false
         textView.textContainer.lineFragmentPadding = 0

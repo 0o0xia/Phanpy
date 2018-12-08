@@ -9,9 +9,15 @@ import Foundation
 import MastodonKit
 
 final class StatusContentParser: NSObject {
+    private struct Element {
+        let name: String
+        let attributes: [String: String]
+    }
+
     var output = NSMutableAttributedString()
 
-    private var currentElements: [String] = []
+    private var currentElements: [Element] = []
+    private var currentURL: URL?
 
     init(content: String) {
         super.init()
@@ -34,9 +40,12 @@ extension StatusContentParser: XMLParserDelegate {
         qualifiedName qName: String?,
         attributes attributeDict: [String: String] = [:]
     ) {
-        currentElements.append(elementName)
+        currentElements.append(Element(name: elementName, attributes: attributeDict))
         if elementName == "p" && output.length > 0 {
             output.append(NSAttributedString(string: "\n\n"))
+        }
+        if elementName == "a" {
+            currentURL = URL(string: attributeDict["href"] ?? "")
         }
     }
 
@@ -57,9 +66,26 @@ extension StatusContentParser: XMLParserDelegate {
             fatalError()
         }
 
-        switch element {
+        switch element.name {
         case "p":
-            output.append(NSAttributedString(string: string))
+            output.append(NSAttributedString(string: string, attributes: [
+                .font: UIFont.preferredFont(forTextStyle: .body),
+            ]))
+        case "span":
+            switch element.attributes["class"] {
+            case "":
+                output.append(NSAttributedString(string: string, attributes: [
+                    .font: UIFont.preferredFont(forTextStyle: .body),
+                    .link: currentURL as Any,
+                ]))
+            case "ellipsis":
+                output.append(NSAttributedString(string: "\(string)...", attributes: [
+                    .font: UIFont.preferredFont(forTextStyle: .body),
+                    .link: currentURL as Any,
+                ]))
+            default:
+                break
+            }
         default:
             break
         }
