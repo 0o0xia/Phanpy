@@ -17,6 +17,24 @@ final class StatusTableViewCell: UITableViewCell {
             }
 
             avatarImageView.kf.setImage(with: URL(string: status.account.avatarStatic))
+            nameLabel.attributedText = {
+                let attributedString = NSMutableAttributedString()
+                if !status.account.displayName.isEmpty {
+                    attributedString.append(NSAttributedString(
+                        string: status.account.displayName,
+                        attributes: [.font: UIFont.preferredFont(forTextStyle: .headline)]
+                    ))
+                    attributedString.append(NSAttributedString(string: " "))
+                }
+                attributedString.append(NSAttributedString(
+                    string: "@\(status.account.acct)",
+                    attributes: [
+                        .font: UIFont.preferredFont(forTextStyle: .subheadline),
+                        .foregroundColor: UIColor.darkGray,
+                    ]
+                ))
+                return attributedString
+            }()
         }
     }
 
@@ -28,10 +46,22 @@ final class StatusTableViewCell: UITableViewCell {
         return imageView
     }()
 
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         contentView.addSubview(avatarImageView)
+        contentView.addSubview(nameLabel)
+
+        setUpConstraints()
+    }
+
+    private func setUpConstraints() {
         NSLayoutConstraint.activate([
             avatarImageView.widthAnchor.constraint(equalToConstant: 50),
             avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
@@ -39,7 +69,17 @@ final class StatusTableViewCell: UITableViewCell {
             avatarImageView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
             avatarImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.layoutMarginsGuide.bottomAnchor),
         ])
+        NSLayoutConstraint.activate([
+            nameLabel.leadingAnchor.constraint(
+                equalToSystemSpacingAfter: avatarImageView.trailingAnchor,
+                multiplier: 1
+            ),
+            nameLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
+            nameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor),
+        ])
     }
+
+    // MARK: -
 
     required init?(coder aDecoder: NSCoder) {
         fatalError()
