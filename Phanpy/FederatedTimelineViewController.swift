@@ -9,7 +9,6 @@ import MastodonKit
 import UIKit
 
 final class FederatedTimelineViewController: UIViewController {
-
     private var statuses: [Status] = []
 
     private lazy var tableView: UITableView = {
@@ -30,7 +29,7 @@ final class FederatedTimelineViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "FederatedTimeline"
+        title = "Federated Timeline"
         refresh()
     }
 
