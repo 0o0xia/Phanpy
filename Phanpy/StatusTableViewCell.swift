@@ -37,32 +37,36 @@ final class StatusTableViewCell: UITableViewCell {
                 return attributedString
             }()
             timeLabel.text = status.createdAt.shortTimeAgoSinceNow
+            contentTextView.text = status.content
         }
     }
+
+    // MARK: -
 
     private let avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 5
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let nameLabel = UILabel()
 
     private let timeLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.textColor = .gray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.setContentCompressionResistancePriority(.required, for: .horizontal)
-        label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }()
+
+    private let contentTextView: UITextView = {
+        let textView = UITextView()
+        textView.isScrollEnabled = false
+        textView.isEditable = false
+        textView.textContainer.lineFragmentPadding = 0
+        return textView
+    }()
+
+    // MARK: -
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -70,11 +74,14 @@ final class StatusTableViewCell: UITableViewCell {
         contentView.addSubview(avatarImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(timeLabel)
+        contentView.addSubview(contentTextView)
 
         setUpConstraints()
     }
 
     private func setUpConstraints() {
+        avatarImageView.layer.cornerRadius = 5
+        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             avatarImageView.widthAnchor.constraint(equalToConstant: 50),
             avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
@@ -82,6 +89,7 @@ final class StatusTableViewCell: UITableViewCell {
             avatarImageView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
             avatarImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.layoutMarginsGuide.bottomAnchor),
         ])
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(
                 equalToSystemSpacingAfter: avatarImageView.trailingAnchor,
@@ -89,10 +97,20 @@ final class StatusTableViewCell: UITableViewCell {
             ),
             nameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor),
         ])
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        timeLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        timeLabel.setContentHuggingPriority(.required, for: .horizontal)
         NSLayoutConstraint.activate([
             timeLabel.firstBaselineAnchor.constraint(equalTo: nameLabel.firstBaselineAnchor),
             timeLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
             timeLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
+        ])
+        contentTextView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            contentTextView.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            contentTextView.trailingAnchor.constraint(equalTo: timeLabel.trailingAnchor),
+            contentTextView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
+            contentTextView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.layoutMarginsGuide.bottomAnchor),
         ])
     }
 
