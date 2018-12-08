@@ -14,6 +14,8 @@
 		8CD7BE3121BBFA1E00C993C9 /* PhanpyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7BE3021BBFA1E00C993C9 /* PhanpyTests.swift */; };
 		8CD7BE3D21BC074800C993C9 /* FederatedTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7BE3B21BC074800C993C9 /* FederatedTimelineViewController.swift */; };
 		8CD7BE3E21BC074800C993C9 /* FederatedTimelineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7BE3C21BC074800C993C9 /* FederatedTimelineViewController.xib */; };
+		8CD7BE4321BC0F9D00C993C9 /* StatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7BE4121BC0F9D00C993C9 /* StatusTableViewCell.swift */; };
+		8CD7BE4421BC0F9D00C993C9 /* StatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7BE4221BC0F9D00C993C9 /* StatusTableViewCell.xib */; };
 		F75C6F77CC1FB97C20188F5D /* Pods_Phanpy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A783EADD95F3254958F06902 /* Pods_Phanpy.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,8 @@
 		8CD7BE3221BBFA1E00C993C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CD7BE3B21BC074800C993C9 /* FederatedTimelineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FederatedTimelineViewController.swift; sourceTree = "<group>"; };
 		8CD7BE3C21BC074800C993C9 /* FederatedTimelineViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FederatedTimelineViewController.xib; sourceTree = "<group>"; };
+		8CD7BE4121BC0F9D00C993C9 /* StatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewCell.swift; sourceTree = "<group>"; };
+		8CD7BE4221BC0F9D00C993C9 /* StatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusTableViewCell.xib; sourceTree = "<group>"; };
 		A783EADD95F3254958F06902 /* Pods_Phanpy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Phanpy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -92,6 +96,8 @@
 				8CD7BE1B21BBFA1C00C993C9 /* AppDelegate.swift */,
 				8CD7BE3B21BC074800C993C9 /* FederatedTimelineViewController.swift */,
 				8CD7BE3C21BC074800C993C9 /* FederatedTimelineViewController.xib */,
+				8CD7BE4121BC0F9D00C993C9 /* StatusTableViewCell.swift */,
+				8CD7BE4221BC0F9D00C993C9 /* StatusTableViewCell.xib */,
 				8CD7BE2221BBFA1E00C993C9 /* Assets.xcassets */,
 				8CD7BE2421BBFA1E00C993C9 /* LaunchScreen.storyboard */,
 				8CD7BE2721BBFA1E00C993C9 /* Info.plist */,
@@ -214,6 +220,7 @@
 				8CD7BE2621BBFA1E00C993C9 /* LaunchScreen.storyboard in Resources */,
 				8CD7BE2321BBFA1E00C993C9 /* Assets.xcassets in Resources */,
 				8CD7BE3E21BC074800C993C9 /* FederatedTimelineViewController.xib in Resources */,
+				8CD7BE4421BC0F9D00C993C9 /* StatusTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CD7BE4321BC0F9D00C993C9 /* StatusTableViewCell.swift in Sources */,
 				8CD7BE3D21BC074800C993C9 /* FederatedTimelineViewController.swift in Sources */,
 				8CD7BE1C21BBFA1C00C993C9 /* AppDelegate.swift in Sources */,
 			);
