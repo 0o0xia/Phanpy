@@ -77,7 +77,10 @@ extension StatusContentParser: XMLParserDelegate {
 
         switch element.name {
         case "a":
-            guard element.attributes["class"] != "u-url mention" else {
+            guard
+                element.attributes["class"] != "u-url mention",
+                element.attributes["class"] != "mention hashtag"
+            else {
                 break
             }
 
@@ -100,6 +103,13 @@ extension StatusContentParser: XMLParserDelegate {
                         var attributes = defaultAttributes
                         attributes[.link] = url
                         output.append(NSAttributedString(string: "@\(string)", attributes: attributes))
+                        break
+                    }
+                    if element.name == "a" && element.attributes["class"] == "mention hashtag",
+                        let url = URL(string: element.attributes["href"] ?? "") {
+                        var attributes = defaultAttributes
+                        attributes[.link] = url
+                        output.append(NSAttributedString(string: "#\(string)", attributes: attributes))
                         break
                     }
                 }

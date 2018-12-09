@@ -85,4 +85,18 @@ final class PhanpyTests: XCTestCase {
             """
         )
     }
+
+    func testStatusContentParser5() {
+        // swiftlint:disable line_length
+        let content = """
+            <p><a href="https://mastodon.social/tags/apple" class="mention hashtag" rel="tag">#<span>apple</span></a></p>
+            """
+        // swiftlint:enable line_length
+        let parser = StatusContentParser(content: content)
+        XCTAssertEqual(parser.parse().string, "#apple")
+        XCTAssertEqual(parser.parse(), NSAttributedString(string: "#apple", attributes: [
+            .font: UIFont.preferredFont(forTextStyle: .body),
+            .link: URL(string: "https://mastodon.social/tags/apple")!,
+        ]))
+    }
 }
