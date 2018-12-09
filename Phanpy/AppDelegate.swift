@@ -20,6 +20,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let tabBarController = UITabBarController()
             tabBarController.viewControllers = [
                 UINavigationController(rootViewController: {
+                    let viewController = HomeViewController()
+                    viewController.title = "Home"
+                    viewController.tabBarItem = UITabBarItem(
+                        title: viewController.title,
+                        image: UIImage(named: "Home"),
+                        selectedImage: nil
+                    )
+                    return viewController
+                }()),
+                UINavigationController(rootViewController: {
                     let viewController = PublicTimelineViewController()
                     viewController.title = "Local Timeline"
                     viewController.tabBarItem = UITabBarItem(
@@ -32,15 +42,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UINavigationController(rootViewController: {
                     let viewController = PublicTimelineViewController()
                     viewController.isLocal = false
+                    viewController.title = "Federated Timeline"
                     viewController.tabBarItem = UITabBarItem(
                         title: viewController.title,
                         image: UIImage(named: "FederatedTimeline"),
                         selectedImage: nil
                     )
-                    viewController.title = "Federated Timeline"
                     return viewController
                 }()),
             ]
+            tabBarController.selectedIndex = 1
             return tabBarController
         }()
         window?.makeKeyAndVisible()
