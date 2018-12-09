@@ -16,7 +16,7 @@ final class PhanpyTests: XCTestCase {
             """
         // swiftlint:enable line_length
         let parser = StatusContentParser(content: content)
-        XCTAssertEqual(parser.output.string, """
+        XCTAssertEqual(parser.parse().string, """
             苏武腿。天苍茫，月迷茫，不知是看词还是看腿。
             now the full article is here
             苏武牧羊 (Su Wu Mu Yang)
@@ -32,7 +32,7 @@ final class PhanpyTests: XCTestCase {
             """
         // swiftlint:enable line_length
         let parser = StatusContentParser(content: content)
-        XCTAssertEqual(parser.output.string, """
+        XCTAssertEqual(parser.parse().string, """
             hit or miss
             I guess they never miss huh
             You got a comfort character
@@ -50,7 +50,7 @@ final class PhanpyTests: XCTestCase {
         // swiftlint:enable line_length
         let parser = StatusContentParser(content: content)
         // swiftlint:disable line_length
-        XCTAssertEqual(parser.output.string, """
+        XCTAssertEqual(parser.parse().string, """
             Donald Trump wechselt zum zweiten Mal seinen Stabschef im Weißen Haus aus. John Kelly werde zum Jahreswechsel gehen, so der US-Präsident. Ein Nachfolger soll bis Montag feststehen. www.zdf.de/nachrichten/heute/u…
             """
         )
@@ -58,17 +58,13 @@ final class PhanpyTests: XCTestCase {
     }
 
     func testStatusContentParser3() {
-        // swiftlint:disable line_length
         let content = """
             <p><span>あと仕事でコード書いてるからな</span></p>
             """
-        // swiftlint:enable line_length
         let parser = StatusContentParser(content: content)
-        // swiftlint:disable line_length
-        XCTAssertEqual(parser.output.string, """
+        XCTAssertEqual(parser.parse().string, """
             あと仕事でコード書いてるからな
             """
         )
-        // swiftlint:enable line_length
     }
 }

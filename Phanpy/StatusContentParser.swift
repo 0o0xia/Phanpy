@@ -5,8 +5,7 @@
 //  Created by 李孛 on 2018/12/9.
 //
 
-import Foundation
-import MastodonKit
+import UIKit
 
 final class StatusContentParser: NSObject {
     private struct Element {
@@ -14,21 +13,25 @@ final class StatusContentParser: NSObject {
         let attributes: [String: String]
     }
 
-    var output = NSMutableAttributedString()
+    private let data: Data
+    private var output = NSMutableAttributedString()
 
     private var currentElements: [Element] = []
     private var currentURL: URL?
 
     init(content: String) {
+        data = "<p>\(content)</p>".data(using: .utf8) ?? Data()
         super.init()
+    }
 
-        guard let data = "<p>\(content)</p>".data(using: .utf8) else {
-            return
-        }
+    func parse() -> NSAttributedString {
+        output = NSMutableAttributedString()
 
         let xmlParser = XMLParser(data: data)
         xmlParser.delegate = self
         xmlParser.parse()
+
+        return output
     }
 }
 

@@ -37,7 +37,7 @@ final class StatusTableViewCell: UITableViewCell {
                 return attributedString
             }()
             timeLabel.text = status.createdAt.shortTimeAgoSinceNow
-            contentTextView.attributedText = StatusContentParser(content: status.content).output
+            contentTextView.attributedText = StatusContentParser(content: status.content).parse()
         }
     }
 
