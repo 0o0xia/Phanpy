@@ -31,7 +31,7 @@ final class StatusTableViewCell: UITableViewCell {
                     string: "@\(status.account.acct)",
                     attributes: [
                         .font: UIFont.preferredFont(forTextStyle: .subheadline),
-                        .foregroundColor: UIColor.darkGray,
+                        .foregroundColor: UIColor.gray,
                     ]
                 ))
                 return attributedString
@@ -59,9 +59,9 @@ final class StatusTableViewCell: UITableViewCell {
     }()
 
     private let contentTextView: UITextView = {
-        let textView = UITextView()
-        textView.isScrollEnabled = false
+        let textView = TextView()
         textView.isEditable = false
+        textView.isScrollEnabled = false
         textView.textContainer.lineFragmentPadding = 0
         return textView
     }()
@@ -80,7 +80,7 @@ final class StatusTableViewCell: UITableViewCell {
     }
 
     private func setUpConstraints() {
-        avatarImageView.layer.cornerRadius = 5
+        avatarImageView.layer.cornerRadius = 25
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             avatarImageView.widthAnchor.constraint(equalToConstant: 50),
@@ -122,5 +122,11 @@ final class StatusTableViewCell: UITableViewCell {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError()
+    }
+}
+
+fileprivate final class TextView: UITextView {
+    override var canBecomeFirstResponder: Bool {
+        return false
     }
 }
