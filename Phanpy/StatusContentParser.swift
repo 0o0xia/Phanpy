@@ -13,11 +13,16 @@ final class StatusContentParser: NSObject {
         let attributes: [String: String]
     }
 
+    // MARK: -
+
     private let data: Data
     private var output = NSMutableAttributedString()
-
     private var currentElements: [Element] = []
-    private var currentURL: URL?
+    private let defaultAttributes: [NSAttributedString.Key: Any] = [
+        .font: UIFont.preferredFont(forTextStyle: .body),
+    ]
+
+    // MARK: -
 
     init(content: String) {
         data = "<p>\(content)</p>".data(using: .utf8) ?? Data()
@@ -35,6 +40,7 @@ final class StatusContentParser: NSObject {
     }
 }
 
+// MARK: - XMLParserDelegate
 extension StatusContentParser: XMLParserDelegate {
     func parser(
         _ parser: XMLParser,
@@ -44,13 +50,12 @@ extension StatusContentParser: XMLParserDelegate {
         attributes attributeDict: [String: String] = [:]
     ) {
         currentElements.append(Element(name: elementName, attributes: attributeDict))
+
         switch elementName {
-        case "p" where output.length > 0:
-            output.append(NSAttributedString(string: "\n\n"))
-        case "a":
-            currentURL = URL(string: attributeDict["href"] ?? "")
         case "br":
             output.append(NSAttributedString(string: "\n"))
+        case "p" where output.length > 0:
+            output.append(NSAttributedString(string: "\n\n"))
         default:
             break
         }
@@ -71,34 +76,34 @@ extension StatusContentParser: XMLParserDelegate {
         }
 
         switch element.name {
-        case "p", "br":
-            output.append(NSAttributedString(string: string, attributes: [
-                .font: UIFont.preferredFont(forTextStyle: .body),
-            ]))
+        case "a":
+            var attributes = defaultAttributes
+            if let url = URL(string: element.attributes["href"] ?? "") {
+                attributes[.link] = url
+            }
+            output.append(NSAttributedString(string: string, attributes: attributes))
+
+        case "br", "p":
+            output.append(NSAttributedString(string: string, attributes: defaultAttributes))
+
         case "span":
             switch element.attributes["class"] {
-            case "":
-                output.append(NSAttributedString(string: string, attributes: [
-                    .font: UIFont.preferredFont(forTextStyle: .body),
-                    .link: currentURL as Any,
-                ]))
-            case "ellipsis":
-                output.append(NSAttributedString(string: "\(string)...", attributes: [
-                    .font: UIFont.preferredFont(forTextStyle: .body),
-                    .link: currentURL as Any,
-                ]))
             case nil:
-                output.append(NSAttributedString(string: string, attributes: [
-                    .font: UIFont.preferredFont(forTextStyle: .body),
-                ]))
+                output.append(NSAttributedString(string: string, attributes: defaultAttributes))
+            case "", "ellipsis":
+                var attributes = defaultAttributes
+                if currentElements.count > 1 {
+                    let element = currentElements[currentElements.count - 2]
+                    if element.name == "a", let url = URL(string: element.attributes["href"] ?? "") {
+                        attributes[.link] = url
+                    }
+                }
+                let ellipsis = element.attributes["class"] == "ellipsis" ? "..." : ""
+                output.append(NSAttributedString(string: "\(string)\(ellipsis)", attributes: attributes))
             default:
                 break
             }
-        case "a":
-            output.append(NSAttributedString(string: string, attributes: [
-                .font: UIFont.preferredFont(forTextStyle: .body),
-                .link: currentURL as Any,
-            ]))
+
         default:
             break
         }
