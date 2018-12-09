@@ -22,7 +22,7 @@ final class StatusContentParser: NSObject {
     init(content: String) {
         super.init()
 
-        guard let data = "<content>\(content)</content>".data(using: .utf8) else {
+        guard let data = "<p>\(content)</p>".data(using: .utf8) else {
             return
         }
 
@@ -60,9 +60,6 @@ extension StatusContentParser: XMLParserDelegate {
         qualifiedName qName: String?
     ) {
         currentElements.removeLast()
-        if elementName == "br" {
-            output.append(NSAttributedString(string: "\n"))
-        }
     }
 
     func parser(_ parser: XMLParser, foundCharacters string: String) {
@@ -87,9 +84,18 @@ extension StatusContentParser: XMLParserDelegate {
                     .font: UIFont.preferredFont(forTextStyle: .body),
                     .link: currentURL as Any,
                 ]))
+            case nil:
+                output.append(NSAttributedString(string: string, attributes: [
+                    .font: UIFont.preferredFont(forTextStyle: .body),
+                ]))
             default:
                 break
             }
+        case "a":
+            output.append(NSAttributedString(string: string, attributes: [
+                .font: UIFont.preferredFont(forTextStyle: .body),
+                .link: currentURL as Any,
+            ]))
         default:
             break
         }
