@@ -25,6 +25,7 @@ final class StatusContentParser: NSObject {
     // MARK: -
 
     init(content: String) {
+        let content = content.replacingOccurrences(of: "<br>", with: "<br></br>")
         data = "<content>\(content)</content>".data(using: .utf8) ?? Data()
         super.init()
     }
