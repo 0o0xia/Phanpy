@@ -1,5 +1,5 @@
 //
-//  FederatedTimelineViewController.swift
+//  PublicTimelineViewController.swift
 //  Phanpy
 //
 //  Created by 李孛 on 2018/12/8.
@@ -8,7 +8,9 @@
 import MastodonKit
 import UIKit
 
-final class FederatedTimelineViewController: UIViewController {
+final class PublicTimelineViewController: UIViewController {
+    var isLocal = true
+
     private var statuses: [Status] = []
 
     private lazy var tableView: UITableView = {
@@ -30,13 +32,12 @@ final class FederatedTimelineViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Federated Timeline"
         refresh()
     }
 
     @objc
     private func refresh() {
-        Client(baseURL: "https://mastodon.social").run(Timelines.public()) { result in
+        Client(baseURL: "https://mastodon.social").run(Timelines.public(local: isLocal, range: .default)) { result in
             switch result {
             case .success(let statuses, _):
                 DispatchQueue.main.async {
@@ -53,7 +54,7 @@ final class FederatedTimelineViewController: UIViewController {
     }
 }
 
-extension FederatedTimelineViewController: UITableViewDataSource {
+extension PublicTimelineViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return statuses.count
     }
@@ -70,7 +71,7 @@ extension FederatedTimelineViewController: UITableViewDataSource {
     }
 }
 
-extension FederatedTimelineViewController: UITableViewDelegate {
+extension PublicTimelineViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let textView = UITextView()
         textView.text = statuses[indexPath.row].content
