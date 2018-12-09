@@ -88,6 +88,34 @@ final class StatusContentParserTests: XCTestCase {
             .link: URL(string: "https://mastodon.social/tags/apple")!,
         ]))
     }
+
+    func test6() {
+        let content = """
+            <p>Redmine 4.0がリリースされました。また、同時に3.4.7と3.3.9もリリースされています。昨年7月の3.4.0以来、一年以上ぶりのメジャーバージョンアップとなりました。</p><p>▶ Redmine 4.0.0, 3.4.7 and 3.3.9 released<br><a href="https://www.redmine.org/news/119" rel="nofollow noopener" target="_blank"><span class="invisible">https://www.</span><span class="">redmine.org/news/119</span><span class="invisible"></span></a></p><p>Redmine 4.0の改善点のいくつかは以下の資料で解説しています。</p><p>▶ Redmine 4.0 おすすめ新機能 ピックアップ（第2版）<br><a href="https://www.slideshare.net/g_maeda/redmine-40-2" rel="nofollow noopener" target="_blank"><span class="invisible">https://www.</span><span class="ellipsis">slideshare.net/g_maeda/redmine</span><span class="invisible">-40-2</span></a></p><p>また、その中から特に個人的に気に入っている機能をピックアップして以下のページで紹介しています。</p><p>▶ リリース間近のRedmine 4.0.0 前田の個人的お気に入り新機能7選<br><a href="https://www.farend.co.jp/blog/2018/10/redmine-4/" rel="nofollow noopener" target="_blank"><span class="invisible">https://www.</span><span class="ellipsis">farend.co.jp/blog/2018/10/redm</span><span class="invisible">ine-4/</span></a></p><p>手っ取り早く4.0を試してみたい方は以下のデモサイトをご利用ください。</p><p><a href="https://my.redmine.jp/demo/" rel="nofollow noopener" target="_blank"><span class="invisible">https://</span><span class="">my.redmine.jp/demo/</span><span class="invisible"></span></a></p>
+            """
+        let parser = StatusContentParser(content: content)
+        XCTAssertEqual(parser.parse().string, """
+            Redmine 4.0がリリースされました。また、同時に3.4.7と3.3.9もリリースされています。昨年7月の3.4.0以来、一年以上ぶりのメジャーバージョンアップとなりました。
+
+            ▶ Redmine 4.0.0, 3.4.7 and 3.3.9 released
+            redmine.org/news/119
+
+            Redmine 4.0の改善点のいくつかは以下の資料で解説しています。
+
+            ▶ Redmine 4.0 おすすめ新機能 ピックアップ（第2版）
+            slideshare.net/g_maeda/redmine...
+
+            また、その中から特に個人的に気に入っている機能をピックアップして以下のページで紹介しています。
+
+            ▶ リリース間近のRedmine 4.0.0 前田の個人的お気に入り新機能7選
+            farend.co.jp/blog/2018/10/redm...
+
+            手っ取り早く4.0を試してみたい方は以下のデモサイトをご利用ください。
+
+            my.redmine.jp/demo/
+            """
+        )
+    }
 }
 
 // swiftlint:enable line_length

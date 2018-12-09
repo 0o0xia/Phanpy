@@ -25,7 +25,7 @@ final class StatusContentParser: NSObject {
     // MARK: -
 
     init(content: String) {
-        data = "<p>\(content)</p>".data(using: .utf8) ?? Data()
+        data = "<content>\(content)</content>".data(using: .utf8) ?? Data()
         super.init()
     }
 
@@ -34,7 +34,7 @@ final class StatusContentParser: NSObject {
 
         let xmlParser = XMLParser(data: data)
         xmlParser.delegate = self
-        xmlParser.parse()
+        print(xmlParser.parse())
 
         return output
     }
@@ -49,16 +49,16 @@ extension StatusContentParser: XMLParserDelegate {
         qualifiedName qName: String?,
         attributes attributeDict: [String: String] = [:]
     ) {
-        currentElements.append(Element(name: elementName, attributes: attributeDict))
-
         switch elementName {
         case "br":
             output.append(NSAttributedString(string: "\n"))
+            return
         case "p" where output.length > 0:
             output.append(NSAttributedString(string: "\n\n"))
         default:
             break
         }
+        currentElements.append(Element(name: elementName, attributes: attributeDict))
     }
 
     func parser(
@@ -67,6 +67,9 @@ extension StatusContentParser: XMLParserDelegate {
         namespaceURI: String?,
         qualifiedName qName: String?
     ) {
+        guard elementName != "br" else {
+            return
+        }
         currentElements.removeLast()
     }
 
@@ -90,7 +93,7 @@ extension StatusContentParser: XMLParserDelegate {
             }
             output.append(NSAttributedString(string: string, attributes: attributes))
 
-        case "br", "p":
+        case "content", "p":
             output.append(NSAttributedString(string: string, attributes: defaultAttributes))
 
         case "span":
@@ -131,5 +134,9 @@ extension StatusContentParser: XMLParserDelegate {
         default:
             break
         }
+    }
+
+    func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
+        print(parseError)
     }
 }
