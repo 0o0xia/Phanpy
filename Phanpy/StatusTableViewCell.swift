@@ -90,6 +90,8 @@ final class StatusTableViewCell: UITableViewCell {
             avatarImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.layoutMarginsGuide.bottomAnchor),
         ])
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        nameLabel.setContentHuggingPriority(.required, for: .vertical)
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(
                 equalToSystemSpacingAfter: avatarImageView.trailingAnchor,
@@ -106,6 +108,8 @@ final class StatusTableViewCell: UITableViewCell {
             timeLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
         ])
         contentTextView.translatesAutoresizingMaskIntoConstraints = false
+        contentTextView.setContentCompressionResistancePriority(.required, for: .vertical)
+        contentTextView.setContentHuggingPriority(.required, for: .vertical)
         NSLayoutConstraint.activate([
             contentTextView.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             contentTextView.trailingAnchor.constraint(equalTo: timeLabel.trailingAnchor),
