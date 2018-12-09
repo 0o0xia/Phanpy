@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1574901BD72D7E4110443605 /* Pods_PhanpyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A89DF87305BC13AA759F59 /* Pods_PhanpyTests.framework */; };
+		8C1CF32E21BD1BFB00A66D4E /* StatusContentParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1CF32D21BD1BFB00A66D4E /* StatusContentParserTests.swift */; };
 		8C80AA6721BC2A6600F02B8A /* StatusContentParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C80AA6621BC2A6600F02B8A /* StatusContentParser.swift */; };
 		8CD7BE1C21BBFA1C00C993C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7BE1B21BBFA1C00C993C9 /* AppDelegate.swift */; };
 		8CD7BE2321BBFA1E00C993C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7BE2221BBFA1E00C993C9 /* Assets.xcassets */; };
 		8CD7BE2621BBFA1E00C993C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7BE2421BBFA1E00C993C9 /* LaunchScreen.storyboard */; };
-		8CD7BE3121BBFA1E00C993C9 /* PhanpyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7BE3021BBFA1E00C993C9 /* PhanpyTests.swift */; };
 		8CD7BE3D21BC074800C993C9 /* FederatedTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7BE3B21BC074800C993C9 /* FederatedTimelineViewController.swift */; };
 		8CD7BE4321BC0F9D00C993C9 /* StatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7BE4121BC0F9D00C993C9 /* StatusTableViewCell.swift */; };
 		F75C6F77CC1FB97C20188F5D /* Pods_Phanpy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A783EADD95F3254958F06902 /* Pods_Phanpy.framework */; };
@@ -34,6 +34,7 @@
 		152759A3C7C8DCDA4568429A /* Pods-Phanpy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Phanpy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Phanpy/Pods-Phanpy.release.xcconfig"; sourceTree = "<group>"; };
 		30637E5625B62A342B270E15 /* Pods-PhanpyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhanpyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhanpyTests/Pods-PhanpyTests.release.xcconfig"; sourceTree = "<group>"; };
 		37A89DF87305BC13AA759F59 /* Pods_PhanpyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhanpyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C1CF32D21BD1BFB00A66D4E /* StatusContentParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusContentParserTests.swift; sourceTree = "<group>"; };
 		8C80AA6621BC2A6600F02B8A /* StatusContentParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusContentParser.swift; sourceTree = "<group>"; };
 		8CD7BE1821BBFA1C00C993C9 /* Phanpy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phanpy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CD7BE1B21BBFA1C00C993C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,7 +42,6 @@
 		8CD7BE2521BBFA1E00C993C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8CD7BE2721BBFA1E00C993C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CD7BE2C21BBFA1E00C993C9 /* PhanpyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhanpyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8CD7BE3021BBFA1E00C993C9 /* PhanpyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhanpyTests.swift; sourceTree = "<group>"; };
 		8CD7BE3221BBFA1E00C993C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CD7BE3B21BC074800C993C9 /* FederatedTimelineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FederatedTimelineViewController.swift; sourceTree = "<group>"; };
 		8CD7BE4121BC0F9D00C993C9 /* StatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewCell.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 		8CD7BE2F21BBFA1E00C993C9 /* PhanpyTests */ = {
 			isa = PBXGroup;
 			children = (
-				8CD7BE3021BBFA1E00C993C9 /* PhanpyTests.swift */,
+				8C1CF32D21BD1BFB00A66D4E /* StatusContentParserTests.swift */,
 				8CD7BE3221BBFA1E00C993C9 /* Info.plist */,
 			);
 			path = PhanpyTests;
@@ -337,7 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CD7BE3121BBFA1E00C993C9 /* PhanpyTests.swift in Sources */,
+				8C1CF32E21BD1BFB00A66D4E /* StatusContentParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
