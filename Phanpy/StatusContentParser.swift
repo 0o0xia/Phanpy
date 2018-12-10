@@ -41,7 +41,7 @@ final class StatusContentParser: NSObject {
 
         let xmlParser = XMLParser(data: data)
         xmlParser.delegate = self
-        print(xmlParser.parse())
+        xmlParser.parse()
 
         return output
     }
@@ -58,9 +58,9 @@ extension StatusContentParser: XMLParserDelegate {
     ) {
         switch elementName {
         case "br":
-            output.append(NSAttributedString(string: "\n"))
+            output.append(NSAttributedString(string: "\n", attributes: defaultAttributes))
         case "p" where output.length > 0:
-            output.append(NSAttributedString(string: "\n\n"))
+            output.append(NSAttributedString(string: "\n\n", attributes: defaultAttributes))
         default:
             break
         }
