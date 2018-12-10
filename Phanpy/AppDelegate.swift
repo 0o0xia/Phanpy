@@ -20,11 +20,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let tabBarController = UITabBarController()
             tabBarController.viewControllers = [
                 UINavigationController(rootViewController: {
-                    let viewController = HomeViewController()
+                    let viewController = BlankViewController()
                     viewController.title = "Home"
                     viewController.tabBarItem = UITabBarItem(
                         title: viewController.title,
                         image: UIImage(named: "Home"),
+                        selectedImage: nil
+                    )
+                    return viewController
+                }()),
+                UINavigationController(rootViewController: {
+                    let viewController = BlankViewController()
+                    viewController.title = "Notification"
+                    viewController.tabBarItem = UITabBarItem(
+                        title: viewController.title,
+                        image: UIImage(named: "Notification"),
                         selectedImage: nil
                     )
                     return viewController
@@ -51,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     return viewController
                 }()),
             ]
-            tabBarController.selectedIndex = 1
+            tabBarController.selectedIndex = 2
             return tabBarController
         }()
         window?.makeKeyAndVisible()

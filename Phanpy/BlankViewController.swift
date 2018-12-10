@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  BlankViewController.swift
 //  Phanpy
 //
 //  Created by 李孛 on 2018/12/10.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HomeViewController: UIViewController {
+final class BlankViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
