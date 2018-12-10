@@ -46,23 +46,37 @@ final class StatusTableViewCell: UITableViewCell {
     private let avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 25
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
-    private let nameLabel = UILabel()
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        label.setContentHuggingPriority(.required, for: .vertical)
+        return label
+    }()
 
     private let timeLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.textColor = .gray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
+        label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }()
 
     private let contentTextView: UITextView = {
-        let textView = TextView()
+        let textView = UITextView()
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.textContainer.lineFragmentPadding = 0
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.setContentCompressionResistancePriority(.required, for: .vertical)
+        textView.setContentHuggingPriority(.required, for: .vertical)
         return textView
     }()
 
@@ -80,8 +94,6 @@ final class StatusTableViewCell: UITableViewCell {
     }
 
     private func setUpConstraints() {
-        avatarImageView.layer.cornerRadius = 25
-        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             avatarImageView.widthAnchor.constraint(equalToConstant: 50),
             avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
@@ -89,9 +101,6 @@ final class StatusTableViewCell: UITableViewCell {
             avatarImageView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
             avatarImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.layoutMarginsGuide.bottomAnchor),
         ])
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
-        nameLabel.setContentHuggingPriority(.required, for: .vertical)
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(
                 equalToSystemSpacingAfter: avatarImageView.trailingAnchor,
@@ -99,17 +108,11 @@ final class StatusTableViewCell: UITableViewCell {
             ),
             nameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor),
         ])
-        timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        timeLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
-        timeLabel.setContentHuggingPriority(.required, for: .horizontal)
         NSLayoutConstraint.activate([
             timeLabel.firstBaselineAnchor.constraint(equalTo: nameLabel.firstBaselineAnchor),
             timeLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
             timeLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
         ])
-        contentTextView.translatesAutoresizingMaskIntoConstraints = false
-        contentTextView.setContentCompressionResistancePriority(.required, for: .vertical)
-        contentTextView.setContentHuggingPriority(.required, for: .vertical)
         NSLayoutConstraint.activate([
             contentTextView.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             contentTextView.trailingAnchor.constraint(equalTo: timeLabel.trailingAnchor),
@@ -122,11 +125,5 @@ final class StatusTableViewCell: UITableViewCell {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError()
-    }
-}
-
-fileprivate final class TextView: UITextView {
-    override var canBecomeFirstResponder: Bool {
-        return false
     }
 }
