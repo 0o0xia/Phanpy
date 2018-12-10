@@ -16,8 +16,8 @@ final class StatusContentParser: NSObject {
     // MARK: -
 
     private let data: Data
-    private var output = NSMutableAttributedString()
-    private var currentElements: [Element] = []
+    private var output: NSMutableAttributedString!
+    private var currentParsingElements: [Element] = []
     private let defaultAttributes: [NSAttributedString.Key: Any] = [
         .font: UIFont.preferredFont(forTextStyle: .body),
     ]
@@ -25,8 +25,14 @@ final class StatusContentParser: NSObject {
     // MARK: -
 
     init(content: String) {
-        let content = content.replacingOccurrences(of: "<br>", with: "<br></br>")
-        data = "<content>\(content)</content>".data(using: .utf8) ?? Data()
+        // Assume a Mastodon instance only use "<br>" or "<br />", not both.
+        // If "<br>" is used, the XMLParser will get error in parsing,
+        // so just replece "<br>" with "<br />".
+        var content = content.replacingOccurrences(of: "<br>", with: "<br />")
+        // XMLParser only parse first node...
+        // So wrap content in a root node.
+        content = "<p>\(content)</p>"
+        data = content.data(using: .utf8) ?? Data()
         super.init()
     }
 
@@ -53,13 +59,12 @@ extension StatusContentParser: XMLParserDelegate {
         switch elementName {
         case "br":
             output.append(NSAttributedString(string: "\n"))
-            return
         case "p" where output.length > 0:
             output.append(NSAttributedString(string: "\n\n"))
         default:
             break
         }
-        currentElements.append(Element(name: elementName, attributes: attributeDict))
+        currentParsingElements.append(Element(name: elementName, attributes: attributeDict))
     }
 
     func parser(
@@ -68,14 +73,11 @@ extension StatusContentParser: XMLParserDelegate {
         namespaceURI: String?,
         qualifiedName qName: String?
     ) {
-        guard elementName != "br" else {
-            return
-        }
-        currentElements.removeLast()
+        currentParsingElements.removeLast()
     }
 
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-        guard let element = currentElements.last else {
+        guard let element = currentParsingElements.last else {
             fatalError()
         }
 
@@ -94,14 +96,14 @@ extension StatusContentParser: XMLParserDelegate {
             }
             output.append(NSAttributedString(string: string, attributes: attributes))
 
-        case "content", "p":
+        case "p":
             output.append(NSAttributedString(string: string, attributes: defaultAttributes))
 
         case "span":
             switch element.attributes["class"] {
             case nil:
-                if currentElements.count > 1 {
-                    let element = currentElements[currentElements.count - 2]
+                if currentParsingElements.count > 1 {
+                    let element = currentParsingElements[currentParsingElements.count - 2]
                     if element.name == "a" && element.attributes["class"] == "u-url mention",
                         let url = URL(string: element.attributes["href"] ?? "") {
                         var attributes = defaultAttributes
@@ -120,8 +122,8 @@ extension StatusContentParser: XMLParserDelegate {
                 output.append(NSAttributedString(string: string, attributes: defaultAttributes))
             case "", "ellipsis":
                 var attributes = defaultAttributes
-                if currentElements.count > 1 {
-                    let element = currentElements[currentElements.count - 2]
+                if currentParsingElements.count > 1 {
+                    let element = currentParsingElements[currentParsingElements.count - 2]
                     if element.name == "a", let url = URL(string: element.attributes["href"] ?? "") {
                         attributes[.link] = url
                     }
@@ -135,9 +137,5 @@ extension StatusContentParser: XMLParserDelegate {
         default:
             break
         }
-    }
-
-    func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
-        print(parseError)
     }
 }
