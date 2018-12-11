@@ -98,7 +98,9 @@ class TimelineViewController: UIViewController {
                         IndexPath(row: self.statuses.count + $0.offset, section: 0)
                     })
                     self.statuses.append(contentsOf: newStatuses)
-                    self.tableView.insertRows(at: indexPaths, with: .none)
+                    UIView.performWithoutAnimation {
+                        self.tableView.insertRows(at: indexPaths, with: .none)
+                    }
                 case .failure(let error):
                     print(error)
                 }
