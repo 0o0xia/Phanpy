@@ -1,15 +1,16 @@
 //
-//  PublicTimelineViewController.swift
+//  TimelineViewController.swift
 //  Phanpy
 //
-//  Created by 李孛 on 2018/12/8.
+//  Created by 李孛 on 2018/12/11.
 //
 
 import MastodonKit
 import UIKit
 
-final class PublicTimelineViewController: UIViewController {
-    var isLocal = true
+class TimelineViewController: UIViewController {
+    private let client: Client
+    private let request: Request<[Status]>
 
     private var statuses: [Status] = []
 
@@ -26,6 +27,21 @@ final class PublicTimelineViewController: UIViewController {
         return tableView
     }()
 
+    // MARK: -
+
+    init(client: Client = Client(baseURL: "https://mastodon.social"), request: Request<[Status]>) {
+        self.client = client
+        self.request = request
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError()
+    }
+
+    // MARK: -
+
     override func loadView() {
         view = tableView
     }
@@ -37,7 +53,7 @@ final class PublicTimelineViewController: UIViewController {
 
     @objc
     private func refresh() {
-        Client(baseURL: "https://mastodon.social").run(Timelines.public(local: isLocal, range: .default)) { result in
+        client.run(request) { result in
             switch result {
             case .success(let statuses, _):
                 DispatchQueue.main.async {
@@ -54,7 +70,7 @@ final class PublicTimelineViewController: UIViewController {
     }
 }
 
-extension PublicTimelineViewController: UITableViewDataSource {
+extension TimelineViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return statuses.count
     }
@@ -63,15 +79,15 @@ extension PublicTimelineViewController: UITableViewDataSource {
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
                 as? StatusTableViewCell
-        else {
-            fatalError()
+            else {
+                fatalError()
         }
         cell.status = statuses[indexPath.row]
         return cell
     }
 }
 
-extension PublicTimelineViewController: UITableViewDelegate {
+extension TimelineViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let textView = UITextView()
         textView.text = statuses[indexPath.row].content

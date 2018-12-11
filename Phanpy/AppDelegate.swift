@@ -5,6 +5,7 @@
 //  Created by 李孛 on 2018/12/8.
 //
 
+import MastodonKit
 import UIKit
 
 @UIApplicationMain
@@ -40,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     return viewController
                 }()),
                 UINavigationController(rootViewController: {
-                    let viewController = PublicTimelineViewController()
+                    let viewController = TimelineViewController(request: Timelines.public(local: true, range: .default))
                     viewController.title = "Local Timeline"
                     viewController.tabBarItem = UITabBarItem(
                         title: viewController.title,
@@ -50,8 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     return viewController
                 }()),
                 UINavigationController(rootViewController: {
-                    let viewController = PublicTimelineViewController()
-                    viewController.isLocal = false
+                    let viewController = TimelineViewController(request: Timelines.public())
                     viewController.title = "Federated Timeline"
                     viewController.tabBarItem = UITabBarItem(
                         title: viewController.title,
