@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let tabBarController = UITabBarController()
             tabBarController.viewControllers = [
                 UINavigationController(rootViewController: {
-                    let viewController = BlankViewController()
+                    let viewController = HomeViewController()
                     viewController.title = "Home"
                     viewController.tabBarItem = UITabBarItem(
                         title: viewController.title,
@@ -61,7 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     return viewController
                 }()),
             ]
-            tabBarController.selectedIndex = 2
             return tabBarController
         }()
         window?.makeKeyAndVisible()

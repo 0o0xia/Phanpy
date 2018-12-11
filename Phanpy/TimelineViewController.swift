@@ -9,7 +9,7 @@ import MastodonKit
 import UIKit
 
 class TimelineViewController: UIViewController {
-    private let client: Client
+    var client: Client
     private let request: Request<[Status]>
 
     private var statuses: [Status] = []

@@ -1,0 +1,37 @@
+//
+//  HomeViewController.swift
+//  Phanpy
+//
+//  Created by 李孛 on 2018/12/11.
+//
+
+import MastodonKit
+import UIKit
+
+final class HomeViewController: TimelineViewController {
+    init() {
+        super.init(request: Timelines.home())
+        client.accessToken = UserDefaults.standard.string(forKey: "me.libei.Phanpy.access-token")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(addAccessToken)
+        )
+    }
+
+    @objc
+    private func addAccessToken() {
+        let alertController = UIAlertController(title: "🎺", message: nil, preferredStyle: .alert)
+        alertController.addTextField()
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Add", style: .default, handler: { _ in
+            self.client.accessToken = alertController.textFields?.first?.text
+            UserDefaults.standard.set(self.client.accessToken, forKey: "me.libei.Phanpy.access-token")
+        }))
+        present(alertController, animated: true)
+    }
+}
