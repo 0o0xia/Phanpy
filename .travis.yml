@@ -1,0 +1,5 @@
+language: swift
+osx_image: xcode10.1
+xcode_workspace: Phanpy.xcworkspace
+xcode_scheme: Phanpy
+xcode_destination: platform=iOS Simulator,name=iPhone X
