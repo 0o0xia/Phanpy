@@ -1,6 +1,10 @@
 language: swift
 osx_image: xcode10.1
+
+before_install: pod repo update
+
 xcode_workspace: Phanpy.xcworkspace
 xcode_scheme: Phanpy
 xcode_destination: platform=iOS Simulator,name=iPhone X
-before_install: pod repo update
+
+after_success: bash <(curl -s https://codecov.io/bash)
