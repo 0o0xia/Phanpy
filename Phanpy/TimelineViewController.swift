@@ -27,6 +27,8 @@ class TimelineViewController: UIViewController {
         return tableView
     }()
 
+    private var isLoadingMore = false
+
     // MARK: -
 
     init(client: Client = Client(baseURL: "https://mastodon.social"), request: Request<[Status]>) {
@@ -51,6 +53,8 @@ class TimelineViewController: UIViewController {
         refresh()
     }
 
+    // MARK: -
+
     @objc
     private func refresh() {
         client.run(request) { result in
@@ -71,7 +75,29 @@ class TimelineViewController: UIViewController {
 
     @objc
     private func loadMoreIfNeeded() {
+        guard !isLoadingMore, let lastStatus = statuses.last else {
+            return
+        }
+        isLoadingMore = true
+        client.run(Timelines.home(range: .max(id: lastStatus.id, limit: nil))) { [weak self] result in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else {
+                    return
+                }
 
+                self.isLoadingMore = false
+                switch result {
+                case .success(let newStatuses, _):
+                    let indexPaths = newStatuses.enumerated().map({
+                        IndexPath(row: self.statuses.count + $0.offset, section: 0)
+                    })
+                    self.statuses.append(contentsOf: newStatuses)
+                    self.tableView.insertRows(at: indexPaths, with: .none)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
 }
 
