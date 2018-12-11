@@ -10,7 +10,9 @@ import UIKit
 
 final class HomeViewController: TimelineViewController {
     init() {
-        super.init(request: Timelines.home())
+        super.init(refreshRequest: Timelines.home(), loadMoreRequestMaker: {
+            Timelines.home(range: .max(id: $0.id, limit: nil))
+        })
         client.accessToken = UserDefaults.standard.string(forKey: "me.libei.Phanpy.access-token")
     }
 

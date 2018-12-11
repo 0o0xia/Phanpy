@@ -41,7 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     return viewController
                 }()),
                 UINavigationController(rootViewController: {
-                    let viewController = TimelineViewController(request: Timelines.public(local: true, range: .default))
+                    let viewController = TimelineViewController(
+                        refreshRequest: Timelines.public(local: true, range: .default),
+                        loadMoreRequestMaker: {
+                            Timelines.public(local: true, range: .max(id: $0.id, limit: nil))
+                        }
+                    )
                     viewController.title = "Local Timeline"
                     viewController.tabBarItem = UITabBarItem(
                         title: viewController.title,
@@ -51,7 +56,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     return viewController
                 }()),
                 UINavigationController(rootViewController: {
-                    let viewController = TimelineViewController(request: Timelines.public())
+                    let viewController = TimelineViewController(
+                        refreshRequest: Timelines.public(),
+                        loadMoreRequestMaker: {
+                            Timelines.public(local: false, range: .max(id: $0.id, limit: nil))
+                        }
+                    )
                     viewController.title = "Federated Timeline"
                     viewController.tabBarItem = UITabBarItem(
                         title: viewController.title,

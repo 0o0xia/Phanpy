@@ -10,7 +10,8 @@ import UIKit
 
 class TimelineViewController: UIViewController {
     var client: Client
-    private let request: Request<[Status]>
+    private let refreshRequest: Request<[Status]>
+    private let loadMoreRequestMaker: (_ lastStatus: Status) -> Request<[Status]>
 
     private var statuses: [Status] = []
 
@@ -31,9 +32,14 @@ class TimelineViewController: UIViewController {
 
     // MARK: -
 
-    init(client: Client = Client(baseURL: "https://mastodon.social"), request: Request<[Status]>) {
+    init(
+        client: Client = Client(baseURL: "https://mastodon.social"),
+        refreshRequest: Request<[Status]>,
+        loadMoreRequestMaker: @escaping (_ lastStatus: Status) -> Request<[Status]>
+    ) {
         self.client = client
-        self.request = request
+        self.refreshRequest = refreshRequest
+        self.loadMoreRequestMaker = loadMoreRequestMaker
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -57,7 +63,7 @@ class TimelineViewController: UIViewController {
 
     @objc
     private func refresh() {
-        client.run(request) { result in
+        client.run(refreshRequest) { result in
             switch result {
             case .success(let statuses, _):
                 DispatchQueue.main.async {
@@ -79,7 +85,7 @@ class TimelineViewController: UIViewController {
             return
         }
         isLoadingMore = true
-        client.run(Timelines.home(range: .max(id: lastStatus.id, limit: nil))) { [weak self] result in
+        client.run(loadMoreRequestMaker(lastStatus)) { [weak self] result in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else {
                     return
