@@ -68,22 +68,53 @@ class TimelineViewController: UIViewController {
             }
         }
     }
+
+    @objc
+    private func loadMoreIfNeeded() {
+
+    }
 }
 
 extension TimelineViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return statuses.count
+        switch section {
+        case 0:
+            return statuses.count
+        default:
+            return 1
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-                as? StatusTableViewCell
-            else {
-                fatalError()
+        switch indexPath.section {
+        case 0:
+            guard
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+                    as? StatusTableViewCell
+                else {
+                    fatalError()
+            }
+            cell.status = statuses[indexPath.row]
+            return cell
+
+        default:
+            let cell = UITableViewCell()
+            let button = UIButton(type: .system)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.addTarget(self, action: #selector(loadMoreIfNeeded), for: .touchUpInside)
+            button.setTitle("Load More", for: .normal)
+            cell.contentView.addSubview(button)
+            NSLayoutConstraint.activate([
+                button.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor),
+                button.topAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.topAnchor),
+                button.bottomAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.bottomAnchor),
+            ])
+            return cell
         }
-        cell.status = statuses[indexPath.row]
-        return cell
     }
 }
 
