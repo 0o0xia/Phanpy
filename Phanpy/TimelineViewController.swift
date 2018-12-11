@@ -154,6 +154,11 @@ extension TimelineViewController: UITableViewDataSource {
 
 extension TimelineViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard indexPath.section == 0 else {
+            return
+        }
+
         let textView = UITextView()
         textView.text = statuses[indexPath.row].content
         let viewController = UIViewController()
