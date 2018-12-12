@@ -1,3 +1,6 @@
 lane :tests do
-  run_tests(scheme: "Phanpy")
+  run_tests(
+    scheme: "Phanpy",
+    code_coverage: true
+  )
 end
