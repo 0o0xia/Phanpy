@@ -1,6 +1,11 @@
 language: swift
 osx_image: xcode10.1
 
-install: bundle exec pod repo update
+install: 
+  - bundle install
+  - bundle exec pod repo update
+  - bundle exec pod install
+
 script: bundle exec fastlane tests
+
 after_success: bash <(curl -s https://codecov.io/bash)
