@@ -127,6 +127,7 @@ final class StatusTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
+    
 }
 
 fileprivate final class TextView: UITextView {
@@ -146,5 +147,9 @@ fileprivate final class TextView: UITextView {
         } else {
             return self
         }
+    }
+
+    override var canBecomeFirstResponder: Bool {
+        return false
     }
 }
