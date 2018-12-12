@@ -127,6 +127,12 @@ final class StatusTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
+
+    // MARK: - UIResponder
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        self.isUserInteractionEnabled = false
+        return false
+    }
 }
 
 fileprivate final class TextView: UITextView {
