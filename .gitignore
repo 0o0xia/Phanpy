@@ -1,3 +1,5 @@
 xcuserdata
 /Pods
 .DS_Store
+/fastlane/test_output
+/fastlane/report.xml
