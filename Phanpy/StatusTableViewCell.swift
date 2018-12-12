@@ -127,10 +127,13 @@ final class StatusTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
-    
 }
 
 fileprivate final class TextView: UITextView {
+    override var canBecomeFirstResponder: Bool {
+        return false
+    }
+
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         var location = point
         location.x -= textContainerInset.left
@@ -147,9 +150,5 @@ fileprivate final class TextView: UITextView {
         } else {
             return self
         }
-    }
-
-    override var canBecomeFirstResponder: Bool {
-        return false
     }
 }
