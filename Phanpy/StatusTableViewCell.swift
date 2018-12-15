@@ -63,17 +63,7 @@ final class StatusTableViewCell: UITableViewCell {
         $0.setContentHuggingPriority(.required, for: .horizontal)
     }
 
-    private let contentTextView: UITextView = {
-        let textView = TextView()
-        textView.isEditable = false
-        textView.isScrollEnabled = false
-        textView.textContainer.lineFragmentPadding = 0
-        textView.textContainerInset = .zero
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.setContentCompressionResistancePriority(.required, for: .vertical)
-        textView.setContentHuggingPriority(.required, for: .vertical)
-        return textView
-    }()
+    private let contentTextView = ContentTextView()
 
     // MARK: -
 
@@ -123,26 +113,46 @@ final class StatusTableViewCell: UITableViewCell {
     }
 }
 
-fileprivate final class TextView: UITextView {
-    override var canBecomeFirstResponder: Bool {
-        return false
-    }
+// MARK: - StatusTableViewCell.ContentTextView
 
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        var location = point
-        location.x -= textContainerInset.left
-        location.y -= textContainerInset.top
+extension StatusTableViewCell {
+    private final class ContentTextView: UITextView {
+        override var canBecomeFirstResponder: Bool {
+            return false
+        }
 
-        let characterIndex = layoutManager.characterIndex(
-            for: location,
-            in: textContainer,
-            fractionOfDistanceBetweenInsertionPoints: nil
-        )
+        init() {
+            super.init(frame: .zero, textContainer: nil)
+            isEditable = false
+            isScrollEnabled = false
+            textContainer.lineFragmentPadding = 0
+            textContainerInset = .zero
+            translatesAutoresizingMaskIntoConstraints = false
+            setContentCompressionResistancePriority(.required, for: .vertical)
+            setContentHuggingPriority(.required, for: .vertical)
+        }
 
-        if textStorage.attribute(.link, at: characterIndex, effectiveRange: nil) == nil {
-            return nil
-        } else {
-            return self
+        override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+            var location = point
+            location.x -= textContainerInset.left
+            location.y -= textContainerInset.top
+
+            let characterIndex = layoutManager.characterIndex(
+                for: location,
+                in: textContainer,
+                fractionOfDistanceBetweenInsertionPoints: nil
+            )
+
+            if textStorage.attribute(.link, at: characterIndex, effectiveRange: nil) == nil {
+                return nil
+            } else {
+                return self
+            }
+        }
+
+        @available(*, unavailable)
+        required init?(coder aDecoder: NSCoder) {
+            fatalError()
         }
     }
 }
