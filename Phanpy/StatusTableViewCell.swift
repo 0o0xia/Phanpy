@@ -43,31 +43,25 @@ final class StatusTableViewCell: UITableViewCell {
 
     // MARK: -
 
-    private let avatarImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 25
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    private let avatarImageView = UIImageView {
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 25
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
 
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.setContentHuggingPriority(.required, for: .vertical)
-        return label
-    }()
+    private let nameLabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.setContentCompressionResistancePriority(.required, for: .vertical)
+        $0.setContentHuggingPriority(.required, for: .vertical)
+    }
 
-    private let timeLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .subheadline)
-        label.textColor = .gray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.setContentCompressionResistancePriority(.required, for: .horizontal)
-        label.setContentHuggingPriority(.required, for: .horizontal)
-        return label
-    }()
+    private let timeLabel = UILabel {
+        $0.font = .preferredFont(forTextStyle: .subheadline)
+        $0.textColor = .gray
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.setContentCompressionResistancePriority(.required, for: .horizontal)
+        $0.setContentHuggingPriority(.required, for: .horizontal)
+    }
 
     private let contentTextView: UITextView = {
         let textView = TextView()
