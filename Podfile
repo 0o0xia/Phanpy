@@ -5,7 +5,7 @@ target 'Phanpy' do
 
   pod 'DateToolsSwift', '~> 4.0'
   pod 'Kingfisher', '~> 5.0'
-  pod 'MastodonKit', :git => 'https://github.com/kylinroc/MastodonKit', :commit => '23e063d32098020c74508307db57b3e89380c789'
+  pod 'MastodonKit', :git => 'https://github.com/MastodonKit/MastodonKit', :commit => '965a6559b2add8b92dabce907d9c8bd09728a1d1'
   pod 'SwiftLint'
 
   script_phase :name => 'SwiftLint', :script => '${PODS_ROOT}/SwiftLint/swiftlint'

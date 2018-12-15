@@ -7,7 +7,7 @@ PODS:
 DEPENDENCIES:
   - DateToolsSwift (~> 4.0)
   - Kingfisher (~> 5.0)
-  - MastodonKit (from `https://github.com/kylinroc/MastodonKit`, commit `23e063d32098020c74508307db57b3e89380c789`)
+  - MastodonKit (from `https://github.com/MastodonKit/MastodonKit`, commit `965a6559b2add8b92dabce907d9c8bd09728a1d1`)
   - SwiftLint
 
 SPEC REPOS:
@@ -18,13 +18,13 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   MastodonKit:
-    :commit: 23e063d32098020c74508307db57b3e89380c789
-    :git: https://github.com/kylinroc/MastodonKit
+    :commit: 965a6559b2add8b92dabce907d9c8bd09728a1d1
+    :git: https://github.com/MastodonKit/MastodonKit
 
 CHECKOUT OPTIONS:
   MastodonKit:
-    :commit: 23e063d32098020c74508307db57b3e89380c789
-    :git: https://github.com/kylinroc/MastodonKit
+    :commit: 965a6559b2add8b92dabce907d9c8bd09728a1d1
+    :git: https://github.com/MastodonKit/MastodonKit
 
 SPEC CHECKSUMS:
   DateToolsSwift: 875d97ff9e3a5d54abdd67a269b3f51c757b71ab
@@ -32,6 +32,6 @@ SPEC CHECKSUMS:
   MastodonKit: 3bc591ea7e626dd160711f9a10cd50f192e46ed3
   SwiftLint: 6772320e40b52049053a518c17db9b0634a0b45a
 
-PODFILE CHECKSUM: ce45726d7ba884c7d39af388372c7f3be50c50cc
+PODFILE CHECKSUM: 40a2267a54d30239aff003594c6d729d3e28d858
 
 COCOAPODS: 1.5.3
