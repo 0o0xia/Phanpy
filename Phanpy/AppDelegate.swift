@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     return viewController
                 }()),
                 UINavigationController(rootViewController: {
-                    let viewController = TimelineViewController(
+                    let viewController = TimelineTableViewController(
                         refreshRequest: Timelines.public(local: true, range: .default),
                         loadMoreRequestMaker: {
                             Timelines.public(local: true, range: .max(id: $0.id, limit: nil))
@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     return viewController
                 }()),
                 UINavigationController(rootViewController: {
-                    let viewController = TimelineViewController(
+                    let viewController = TimelineTableViewController(
                         refreshRequest: Timelines.public(),
                         loadMoreRequestMaker: {
                             Timelines.public(local: false, range: .max(id: $0.id, limit: nil))

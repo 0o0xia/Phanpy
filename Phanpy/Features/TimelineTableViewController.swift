@@ -1,5 +1,5 @@
 //
-//  TimelineViewController.swift
+//  TimelineTableViewController.swift
 //  Phanpy
 //
 //  Created by 李孛 on 2018/12/11.
@@ -8,7 +8,7 @@
 import MastodonKit
 import UIKit
 
-class TimelineViewController: UIViewController {
+final class TimelineTableViewController: UIViewController {
     var client: Client
     private let refreshRequest: Request<[Status]>
     private let loadMoreRequestMaker: (_ lastStatus: Status) -> Request<[Status]>
@@ -109,7 +109,7 @@ class TimelineViewController: UIViewController {
     }
 }
 
-extension TimelineViewController: UITableViewDataSource {
+extension TimelineTableViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -152,7 +152,7 @@ extension TimelineViewController: UITableViewDataSource {
     }
 }
 
-extension TimelineViewController: UITableViewDelegate {
+extension TimelineTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard indexPath.section == 0 else {

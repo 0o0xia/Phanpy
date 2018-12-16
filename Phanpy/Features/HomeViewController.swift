@@ -8,13 +8,12 @@
 import MastodonKit
 import UIKit
 
-final class HomeViewController: TimelineViewController {
-    init() {
-        super.init(refreshRequest: Timelines.home(), loadMoreRequestMaker: {
-            Timelines.home(range: .max(id: $0.id, limit: nil))
-        })
-        client.accessToken = UserDefaults.standard.string(forKey: "me.libei.Phanpy.access-token")
-    }
+final class HomeViewController: UIViewController {
+    private let timelineTableViewController = TimelineTableViewController(
+        refreshRequest: Timelines.home(),
+        loadMoreRequestMaker: { Timelines.home(range: .max(id: $0.id, limit: nil)) }
+    )
+        .then { $0.client.accessToken = UserDefaults.standard.string(forKey: "me.libei.Phanpy.access-token") }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +23,11 @@ final class HomeViewController: TimelineViewController {
             action: #selector(addAccessToken)
         )
         navigationItem.searchController = UISearchController(searchResultsController: nil)
+
+        addChild(timelineTableViewController)
+        view.addSubview(timelineTableViewController.view)
+        timelineTableViewController.view.snp.makeConstraints { $0.edges.equalTo(view) }
+        timelineTableViewController.didMove(toParent: self)
     }
 
     @objc
@@ -32,8 +36,11 @@ final class HomeViewController: TimelineViewController {
         alertController.addTextField()
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Add", style: .default, handler: { _ in
-            self.client.accessToken = alertController.textFields?.first?.text
-            UserDefaults.standard.set(self.client.accessToken, forKey: "me.libei.Phanpy.access-token")
+            self.timelineTableViewController.client.accessToken = alertController.textFields?.first?.text
+            UserDefaults.standard.set(
+                self.timelineTableViewController.client.accessToken,
+                forKey: "me.libei.Phanpy.access-token"
+            )
         }))
         present(alertController, animated: true)
     }

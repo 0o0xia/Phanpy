@@ -12,7 +12,7 @@
 		8C4F63B321C69B53007917FC /* Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F63B221C69B53007917FC /* Kingfisher.swift */; };
 		8C4F63B521C69B61007917FC /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F63B421C69B61007917FC /* Then.swift */; };
 		8C4F63B721C6CA55007917FC /* SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F63B621C6CA55007917FC /* SnapKit.swift */; };
-		8C7382AA21BFAD540017AE77 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7382A921BFAD540017AE77 /* TimelineViewController.swift */; };
+		8C7382AA21BFAD540017AE77 /* TimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7382A921BFAD540017AE77 /* TimelineTableViewController.swift */; };
 		8C7382AC21BFB0F20017AE77 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7382AB21BFB0F20017AE77 /* HomeViewController.swift */; };
 		8C80AA6721BC2A6600F02B8A /* StatusContentParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C80AA6621BC2A6600F02B8A /* StatusContentParser.swift */; };
 		8CD31A8121C12F8F001FED0E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD31A8021C12F8F001FED0E /* main.swift */; };
@@ -43,7 +43,7 @@
 		8C4F63B221C69B53007917FC /* Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kingfisher.swift; sourceTree = "<group>"; };
 		8C4F63B421C69B61007917FC /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		8C4F63B621C6CA55007917FC /* SnapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapKit.swift; sourceTree = "<group>"; };
-		8C7382A921BFAD540017AE77 /* TimelineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
+		8C7382A921BFAD540017AE77 /* TimelineTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTableViewController.swift; sourceTree = "<group>"; };
 		8C7382AB21BFB0F20017AE77 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8C80AA6621BC2A6600F02B8A /* StatusContentParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusContentParser.swift; sourceTree = "<group>"; };
 		8CD31A8021C12F8F001FED0E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -91,8 +91,8 @@
 		8C4F63B921C6CCBE007917FC /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				8C7382A921BFAD540017AE77 /* TimelineTableViewController.swift */,
 				8C7382AB21BFB0F20017AE77 /* HomeViewController.swift */,
-				8C7382A921BFAD540017AE77 /* TimelineViewController.swift */,
 				8CD7BE4121BC0F9D00C993C9 /* StatusTableViewCell.swift */,
 				8C80AA6621BC2A6600F02B8A /* StatusContentParser.swift */,
 			);
@@ -365,7 +365,7 @@
 				8C4F63B321C69B53007917FC /* Kingfisher.swift in Sources */,
 				8C80AA6721BC2A6600F02B8A /* StatusContentParser.swift in Sources */,
 				8CD7BE1C21BBFA1C00C993C9 /* AppDelegate.swift in Sources */,
-				8C7382AA21BFAD540017AE77 /* TimelineViewController.swift in Sources */,
+				8C7382AA21BFAD540017AE77 /* TimelineTableViewController.swift in Sources */,
 				8C4F63B521C69B61007917FC /* Then.swift in Sources */,
 				8C7382AC21BFB0F20017AE77 /* HomeViewController.swift in Sources */,
 			);
