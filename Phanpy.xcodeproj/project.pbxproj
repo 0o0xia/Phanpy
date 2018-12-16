@@ -81,6 +81,7 @@
 		8C4F63B121C69B45007917FC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				8C4DFADE21BD79C40042A639 /* BlankViewController.swift */,
 				8C4F63B221C69B53007917FC /* Kingfisher.swift */,
 				8C4F63B421C69B61007917FC /* Then.swift */,
 			);
@@ -114,7 +115,6 @@
 				8CD31A8021C12F8F001FED0E /* main.swift */,
 				8CD7BE1B21BBFA1C00C993C9 /* AppDelegate.swift */,
 				8C7382AB21BFB0F20017AE77 /* HomeViewController.swift */,
-				8C4DFADE21BD79C40042A639 /* BlankViewController.swift */,
 				8C7382A921BFAD540017AE77 /* TimelineViewController.swift */,
 				8CD7BE4121BC0F9D00C993C9 /* StatusTableViewCell.swift */,
 				8C80AA6621BC2A6600F02B8A /* StatusContentParser.swift */,
