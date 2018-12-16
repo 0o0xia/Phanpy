@@ -22,7 +22,6 @@ final class HomeViewController: UIViewController {
             target: self,
             action: #selector(addAccessToken)
         )
-        navigationItem.searchController = UISearchController(searchResultsController: nil)
 
         addChild(timelineTableViewController)
         view.addSubview(timelineTableViewController.view)

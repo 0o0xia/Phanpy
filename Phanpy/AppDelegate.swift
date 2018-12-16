@@ -37,36 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         selectedImage: nil
                     )
                 }),
-//                UINavigationController(rootViewController: {
-//                    let viewController = TimelineTableViewController(
-//                        refreshRequest: Timelines.public(local: true, range: .default),
-//                        loadMoreRequestMaker: {
-//                            Timelines.public(local: true, range: .max(id: $0.id, limit: nil))
-//                        }
-//                    )
-//                    viewController.title = "Local Timeline"
-//                    viewController.tabBarItem = UITabBarItem(
-//                        title: viewController.title,
-//                        image: UIImage(named: "LocalTimeline"),
-//                        selectedImage: nil
-//                    )
-//                    return viewController
-//                }()),
-//                UINavigationController(rootViewController: {
-//                    let viewController = TimelineTableViewController(
-//                        refreshRequest: Timelines.public(),
-//                        loadMoreRequestMaker: {
-//                            Timelines.public(local: false, range: .max(id: $0.id, limit: nil))
-//                        }
-//                    )
-//                    viewController.title = "Federated Timeline"
-//                    viewController.tabBarItem = UITabBarItem(
-//                        title: viewController.title,
-//                        image: UIImage(named: "FederatedTimeline"),
-//                        selectedImage: nil
-//                    )
-//                    return viewController
-//                }()),
             ]
             return tabBarController
         }()
