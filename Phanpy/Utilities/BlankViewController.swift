@@ -12,17 +12,17 @@ final class BlankViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
 
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.text = "This page is intentionally left blank."
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(label)
+        let label = UILabel().then {
+            $0.numberOfLines = 0
+            $0.text = "This page is intentionally left blank."
+            $0.textAlignment = .center
+        }
 
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
+        view.addSubview(label)
+        label.snp.makeConstraints {
+            $0.leading.equalTo(view.snp.leadingMargin)
+            $0.trailing.equalTo(view.snp.trailingMargin)
+            $0.centerY.equalTo(view.snp.centerY)
+        }
     }
 }
