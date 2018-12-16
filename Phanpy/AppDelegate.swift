@@ -30,16 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     return viewController
                 }()),
                 UINavigationController(rootViewController: {
-                    let viewController = BlankViewController()
-                    viewController.title = "Notification"
-                    viewController.tabBarItem = UITabBarItem(
-                        title: viewController.title,
-                        image: UIImage(named: "Notification"),
-                        selectedImage: nil
-                    )
-                    return viewController
-                }()),
-                UINavigationController(rootViewController: {
                     let viewController = TimelineViewController(
                         refreshRequest: Timelines.public(local: true, range: .default),
                         loadMoreRequestMaker: {

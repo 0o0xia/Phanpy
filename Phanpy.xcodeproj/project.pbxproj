@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1574901BD72D7E4110443605 /* Pods_PhanpyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A89DF87305BC13AA759F59 /* Pods_PhanpyTests.framework */; };
 		8C1CF32E21BD1BFB00A66D4E /* StatusContentParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1CF32D21BD1BFB00A66D4E /* StatusContentParserTests.swift */; };
-		8C4DFADF21BD79C40042A639 /* BlankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4DFADE21BD79C40042A639 /* BlankViewController.swift */; };
 		8C4F63B321C69B53007917FC /* Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F63B221C69B53007917FC /* Kingfisher.swift */; };
 		8C4F63B521C69B61007917FC /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F63B421C69B61007917FC /* Then.swift */; };
 		8C4F63B721C6CA55007917FC /* SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F63B621C6CA55007917FC /* SnapKit.swift */; };
@@ -41,7 +40,6 @@
 		30637E5625B62A342B270E15 /* Pods-PhanpyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhanpyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhanpyTests/Pods-PhanpyTests.release.xcconfig"; sourceTree = "<group>"; };
 		37A89DF87305BC13AA759F59 /* Pods_PhanpyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhanpyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C1CF32D21BD1BFB00A66D4E /* StatusContentParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusContentParserTests.swift; sourceTree = "<group>"; };
-		8C4DFADE21BD79C40042A639 /* BlankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankViewController.swift; sourceTree = "<group>"; };
 		8C4F63B221C69B53007917FC /* Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kingfisher.swift; sourceTree = "<group>"; };
 		8C4F63B421C69B61007917FC /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		8C4F63B621C6CA55007917FC /* SnapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapKit.swift; sourceTree = "<group>"; };
@@ -83,12 +81,22 @@
 		8C4F63B121C69B45007917FC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				8C4DFADE21BD79C40042A639 /* BlankViewController.swift */,
 				8C4F63B221C69B53007917FC /* Kingfisher.swift */,
 				8C4F63B621C6CA55007917FC /* SnapKit.swift */,
 				8C4F63B421C69B61007917FC /* Then.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		8C4F63B921C6CCBE007917FC /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				8C7382AB21BFB0F20017AE77 /* HomeViewController.swift */,
+				8C7382A921BFAD540017AE77 /* TimelineViewController.swift */,
+				8CD7BE4121BC0F9D00C993C9 /* StatusTableViewCell.swift */,
+				8C80AA6621BC2A6600F02B8A /* StatusContentParser.swift */,
+			);
+			path = Features;
 			sourceTree = "<group>";
 		};
 		8CD7BE0F21BBFA1C00C993C9 = {
@@ -115,12 +123,9 @@
 			isa = PBXGroup;
 			children = (
 				8C4F63B121C69B45007917FC /* Utilities */,
-				8CD31A8021C12F8F001FED0E /* main.swift */,
+				8C4F63B921C6CCBE007917FC /* Features */,
 				8CD7BE1B21BBFA1C00C993C9 /* AppDelegate.swift */,
-				8C7382AB21BFB0F20017AE77 /* HomeViewController.swift */,
-				8C7382A921BFAD540017AE77 /* TimelineViewController.swift */,
-				8CD7BE4121BC0F9D00C993C9 /* StatusTableViewCell.swift */,
-				8C80AA6621BC2A6600F02B8A /* StatusContentParser.swift */,
+				8CD31A8021C12F8F001FED0E /* main.swift */,
 				8CD7BE2221BBFA1E00C993C9 /* Assets.xcassets */,
 				8CD7BE2421BBFA1E00C993C9 /* LaunchScreen.storyboard */,
 				8CD7BE2721BBFA1E00C993C9 /* Info.plist */,
@@ -354,7 +359,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C4DFADF21BD79C40042A639 /* BlankViewController.swift in Sources */,
 				8CD31A8121C12F8F001FED0E /* main.swift in Sources */,
 				8C4F63B721C6CA55007917FC /* SnapKit.swift in Sources */,
 				8CD7BE4321BC0F9D00C993C9 /* StatusTableViewCell.swift in Sources */,
