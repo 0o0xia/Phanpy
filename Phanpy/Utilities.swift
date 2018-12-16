@@ -5,18 +5,16 @@
 //  Created by 李孛 on 2018/12/15.
 //
 
-import UIKit
+protocol Configurable: AnyObject {}
 
-extension UIImageView {
-    convenience init(configuration: (UIImageView) -> Void) {
-        self.init()
+extension Configurable {
+    @discardableResult
+    func configure(_ configuration: (Self) -> Void) -> Self {
         configuration(self)
+        return self
     }
 }
 
-extension UILabel {
-    convenience init(configuration: (UILabel) -> Void) {
-        self.init()
-        configuration(self)
-    }
-}
+import Foundation.NSObject
+
+extension NSObject: Configurable {}

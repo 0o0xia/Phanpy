@@ -43,19 +43,19 @@ final class StatusTableViewCell: UITableViewCell {
 
     // MARK: -
 
-    private let avatarImageView = UIImageView {
+    private let avatarImageView = UIImageView().configure {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 25
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    private let nameLabel = UILabel {
+    private let nameLabel = UILabel().configure {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setContentCompressionResistancePriority(.required, for: .vertical)
         $0.setContentHuggingPriority(.required, for: .vertical)
     }
 
-    private let timeLabel = UILabel {
+    private let timeLabel = UILabel().configure {
         $0.font = .preferredFont(forTextStyle: .subheadline)
         $0.textColor = .gray
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +63,15 @@ final class StatusTableViewCell: UITableViewCell {
         $0.setContentHuggingPriority(.required, for: .horizontal)
     }
 
-    private let contentTextView = ContentTextView()
+    private let contentTextView = ContentTextView().configure {
+        $0.isEditable = false
+        $0.isScrollEnabled = false
+        $0.textContainer.lineFragmentPadding = 0
+        $0.textContainerInset = .zero
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.setContentCompressionResistancePriority(.required, for: .vertical)
+        $0.setContentHuggingPriority(.required, for: .vertical)
+    }
 
     // MARK: -
 
@@ -121,17 +129,6 @@ extension StatusTableViewCell {
             return false
         }
 
-        init() {
-            super.init(frame: .zero, textContainer: nil)
-            isEditable = false
-            isScrollEnabled = false
-            textContainer.lineFragmentPadding = 0
-            textContainerInset = .zero
-            translatesAutoresizingMaskIntoConstraints = false
-            setContentCompressionResistancePriority(.required, for: .vertical)
-            setContentHuggingPriority(.required, for: .vertical)
-        }
-
         override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
             var location = point
             location.x -= textContainerInset.left
@@ -148,11 +145,6 @@ extension StatusTableViewCell {
             } else {
                 return self
             }
-        }
-
-        @available(*, unavailable)
-        required init?(coder aDecoder: NSCoder) {
-            fatalError()
         }
     }
 }
