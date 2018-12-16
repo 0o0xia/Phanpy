@@ -66,7 +66,6 @@ final class StatusTableViewCell: UITableViewCell {
         $0.isEditable = false
         $0.isScrollEnabled = false
         $0.textContainer.lineFragmentPadding = 0
-        $0.textContainerInset = .zero
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setContentCompressionResistancePriority(.required, for: .vertical)
         $0.setContentHuggingPriority(.required, for: .vertical)
