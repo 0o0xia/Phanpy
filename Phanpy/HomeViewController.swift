@@ -23,6 +23,7 @@ final class HomeViewController: TimelineViewController {
             target: self,
             action: #selector(addAccessToken)
         )
+        navigationItem.searchController = UISearchController(searchResultsController: nil)
     }
 
     @objc
