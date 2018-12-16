@@ -6,7 +6,6 @@
 //
 
 import DateToolsSwift
-import Kingfisher
 import MastodonKit
 import UIKit
 
@@ -43,19 +42,19 @@ final class StatusTableViewCell: UITableViewCell {
 
     // MARK: -
 
-    private let avatarImageView = UIImageView().configure {
+    private let avatarImageView = UIImageView().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 25
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    private let nameLabel = UILabel().configure {
+    private let nameLabel = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setContentCompressionResistancePriority(.required, for: .vertical)
         $0.setContentHuggingPriority(.required, for: .vertical)
     }
 
-    private let timeLabel = UILabel().configure {
+    private let timeLabel = UILabel().then {
         $0.font = .preferredFont(forTextStyle: .subheadline)
         $0.textColor = .gray
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +62,7 @@ final class StatusTableViewCell: UITableViewCell {
         $0.setContentHuggingPriority(.required, for: .horizontal)
     }
 
-    private let contentTextView = ContentTextView().configure {
+    private let contentTextView = ContentTextView().then {
         $0.isEditable = false
         $0.isScrollEnabled = false
         $0.textContainer.lineFragmentPadding = 0
