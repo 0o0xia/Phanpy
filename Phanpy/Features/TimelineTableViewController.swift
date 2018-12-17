@@ -15,18 +15,17 @@ final class TimelineTableViewController: UIViewController {
 
     private var statuses: [Status] = []
 
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.refreshControl = {
+    private lazy var tableView = UITableView().then {
+        $0.cellLayoutMarginsFollowReadableWidth = true
+        $0.dataSource = self
+        $0.delegate = self
+        $0.refreshControl = {
             let refreshControl = UIRefreshControl()
             refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
             return refreshControl
         }()
-        tableView.register(StatusTableViewCell.self, forCellReuseIdentifier: "cell")
-        return tableView
-    }()
+        $0.register(StatusTableViewCell.self, forCellReuseIdentifier: "cell")
+    }
 
     private var isLoadingMore = false
 

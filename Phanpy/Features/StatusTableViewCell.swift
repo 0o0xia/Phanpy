@@ -138,6 +138,10 @@ extension StatusTableViewCell {
                 fractionOfDistanceBetweenInsertionPoints: nil
             )
 
+            guard characterIndex >= 0 && characterIndex < textStorage.length else {
+                return nil
+            }
+
             if textStorage.attribute(.link, at: characterIndex, effectiveRange: nil) == nil {
                 return nil
             } else {
