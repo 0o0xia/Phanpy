@@ -30,10 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     return viewController
                 }()),
                 UINavigationController(rootViewController: TimelineViewController().then {
-                    $0.title = "Timeline"
                     $0.tabBarItem = UITabBarItem(
-                        title: $0.title,
-                        image: UIImage(named: "LocalTimeline"),
+                        title: "Timeline",
+                        image: UIImage(named: "Federated"),
                         selectedImage: nil
                     )
                 }),
