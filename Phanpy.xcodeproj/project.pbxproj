@@ -11,7 +11,6 @@
 		8C1CF32E21BD1BFB00A66D4E /* StatusContentParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1CF32D21BD1BFB00A66D4E /* StatusContentParserTests.swift */; };
 		8C4F63B321C69B53007917FC /* Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F63B221C69B53007917FC /* Kingfisher.swift */; };
 		8C4F63B521C69B61007917FC /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F63B421C69B61007917FC /* Then.swift */; };
-		8C4F63B721C6CA55007917FC /* SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F63B621C6CA55007917FC /* SnapKit.swift */; };
 		8C4F63BB21C6D41A007917FC /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F63BA21C6D41A007917FC /* TimelineViewController.swift */; };
 		8C4F63BD21C7631C007917FC /* DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F63BC21C7631C007917FC /* DateTools.swift */; };
 		8C7382AA21BFAD540017AE77 /* TimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7382A921BFAD540017AE77 /* TimelineTableViewController.swift */; };
@@ -44,7 +43,6 @@
 		8C1CF32D21BD1BFB00A66D4E /* StatusContentParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusContentParserTests.swift; sourceTree = "<group>"; };
 		8C4F63B221C69B53007917FC /* Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kingfisher.swift; sourceTree = "<group>"; };
 		8C4F63B421C69B61007917FC /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
-		8C4F63B621C6CA55007917FC /* SnapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapKit.swift; sourceTree = "<group>"; };
 		8C4F63BA21C6D41A007917FC /* TimelineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		8C4F63BC21C7631C007917FC /* DateTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTools.swift; sourceTree = "<group>"; };
 		8C7382A921BFAD540017AE77 /* TimelineTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTableViewController.swift; sourceTree = "<group>"; };
@@ -87,7 +85,6 @@
 			children = (
 				8C4F63BC21C7631C007917FC /* DateTools.swift */,
 				8C4F63B221C69B53007917FC /* Kingfisher.swift */,
-				8C4F63B621C6CA55007917FC /* SnapKit.swift */,
 				8C4F63B421C69B61007917FC /* Then.swift */,
 			);
 			path = Utilities;
@@ -301,7 +298,6 @@
 				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MastodonKit/MastodonKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -310,7 +306,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MastodonKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -367,7 +362,6 @@
 			files = (
 				8C4F63BD21C7631C007917FC /* DateTools.swift in Sources */,
 				8CD31A8121C12F8F001FED0E /* main.swift in Sources */,
-				8C4F63B721C6CA55007917FC /* SnapKit.swift in Sources */,
 				8CD7BE4321BC0F9D00C993C9 /* StatusTableViewCell.swift in Sources */,
 				8C4F63B321C69B53007917FC /* Kingfisher.swift in Sources */,
 				8C80AA6721BC2A6600F02B8A /* StatusContentParser.swift in Sources */,

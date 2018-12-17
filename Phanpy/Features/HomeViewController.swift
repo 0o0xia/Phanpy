@@ -25,7 +25,13 @@ final class HomeViewController: UIViewController {
 
         addChild(timelineTableViewController)
         view.addSubview(timelineTableViewController.view)
-        timelineTableViewController.view.snp.makeConstraints { $0.edges.equalTo(view) }
+        timelineTableViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            timelineTableViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            timelineTableViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            timelineTableViewController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            timelineTableViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
         timelineTableViewController.didMove(toParent: self)
     }
 

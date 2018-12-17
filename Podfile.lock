@@ -2,21 +2,18 @@ PODS:
   - DateToolsSwift (4.0.0)
   - Kingfisher (5.0.0)
   - MastodonKit (2.0.0)
-  - SnapKit (4.2.0)
   - SwiftLint (0.29.1)
 
 DEPENDENCIES:
   - DateToolsSwift (~> 4.0)
   - Kingfisher (~> 5.0)
   - MastodonKit (from `https://github.com/MastodonKit/MastodonKit`, commit `965a6559b2add8b92dabce907d9c8bd09728a1d1`)
-  - SnapKit (~> 4.2.0)
   - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - DateToolsSwift
     - Kingfisher
-    - SnapKit
     - SwiftLint
 
 EXTERNAL SOURCES:
@@ -33,9 +30,8 @@ SPEC CHECKSUMS:
   DateToolsSwift: 875d97ff9e3a5d54abdd67a269b3f51c757b71ab
   Kingfisher: 2b0dd651e4fe5a07305b8242fde56f8e2d410f58
   MastodonKit: 3bc591ea7e626dd160711f9a10cd50f192e46ed3
-  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftLint: 6772320e40b52049053a518c17db9b0634a0b45a
 
-PODFILE CHECKSUM: 1a2d1aeb5973530133a19ebb42859495480a99f1
+PODFILE CHECKSUM: 02bb22be48c8ff98c82ca85bddb41a53397fdb41
 
 COCOAPODS: 1.5.3

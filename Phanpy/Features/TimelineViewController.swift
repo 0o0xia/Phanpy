@@ -51,7 +51,13 @@ final class TimelineViewController: UIViewController {
 
         addChild(viewController)
         view.addSubview(viewController.view)
-        viewController.view.snp.makeConstraints { $0.edges.equalToSuperview() }
+        viewController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            viewController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            viewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
         viewController.didMove(toParent: self)
 
         currentTimelineTableViewController = viewController
