@@ -16,6 +16,7 @@
 		8C7382AA21BFAD540017AE77 /* TimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7382A921BFAD540017AE77 /* TimelineTableViewController.swift */; };
 		8C7382AC21BFB0F20017AE77 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7382AB21BFB0F20017AE77 /* HomeViewController.swift */; };
 		8C80AA6721BC2A6600F02B8A /* StatusContentParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C80AA6621BC2A6600F02B8A /* StatusContentParser.swift */; };
+		8CCA015B21C7DAA7007A2C37 /* Do.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA015A21C7DAA7007A2C37 /* Do.swift */; };
 		8CD31A8121C12F8F001FED0E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD31A8021C12F8F001FED0E /* main.swift */; };
 		8CD7BE1C21BBFA1C00C993C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7BE1B21BBFA1C00C993C9 /* AppDelegate.swift */; };
 		8CD7BE2321BBFA1E00C993C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7BE2221BBFA1E00C993C9 /* Assets.xcassets */; };
@@ -48,6 +49,7 @@
 		8C7382A921BFAD540017AE77 /* TimelineTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTableViewController.swift; sourceTree = "<group>"; };
 		8C7382AB21BFB0F20017AE77 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8C80AA6621BC2A6600F02B8A /* StatusContentParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusContentParser.swift; sourceTree = "<group>"; };
+		8CCA015A21C7DAA7007A2C37 /* Do.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Do.swift; sourceTree = "<group>"; };
 		8CD31A8021C12F8F001FED0E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		8CD7BE1821BBFA1C00C993C9 /* Phanpy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phanpy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CD7BE1B21BBFA1C00C993C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				8C4F63BC21C7631C007917FC /* DateTools.swift */,
+				8CCA015A21C7DAA7007A2C37 /* Do.swift */,
 				8C4F63B221C69B53007917FC /* Kingfisher.swift */,
 				8C4F63B421C69B61007917FC /* Then.swift */,
 			);
@@ -363,6 +366,7 @@
 				8C4F63BD21C7631C007917FC /* DateTools.swift in Sources */,
 				8CD31A8121C12F8F001FED0E /* main.swift in Sources */,
 				8CD7BE4321BC0F9D00C993C9 /* StatusTableViewCell.swift in Sources */,
+				8CCA015B21C7DAA7007A2C37 /* Do.swift in Sources */,
 				8C4F63B321C69B53007917FC /* Kingfisher.swift in Sources */,
 				8C80AA6721BC2A6600F02B8A /* StatusContentParser.swift in Sources */,
 				8CD7BE1C21BBFA1C00C993C9 /* AppDelegate.swift in Sources */,
