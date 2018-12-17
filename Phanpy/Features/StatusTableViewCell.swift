@@ -44,7 +44,6 @@ final class StatusTableViewCell: UITableViewCell {
     private let avatarImageView = UIImageView().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 25
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private let nameLabel = UILabel().then {
@@ -84,13 +83,12 @@ final class StatusTableViewCell: UITableViewCell {
     }
 
     private func setUpConstraints() {
-        NSLayoutConstraint.activate([
-            avatarImageView.widthAnchor.constraint(equalToConstant: 50),
-            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
-            avatarImageView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
-            avatarImageView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
-            avatarImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.layoutMarginsGuide.bottomAnchor),
-        ])
+        avatarImageView.snp.makeConstraints {
+            $0.width.height.equalTo(avatarImageView.layer.cornerRadius * 2)
+            $0.leading.equalTo(contentView.snp.leadingMargin)
+            $0.top.equalTo(contentView.snp.top)
+            $0.bottom.lessThanOrEqualTo(contentView.snp.bottomMargin)
+        }
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(
                 equalToSystemSpacingAfter: avatarImageView.trailingAnchor,
