@@ -39,6 +39,12 @@ final class TimelineViewController: UIViewController {
             viewController.removeFromParent()
         }
 
+        tabBarItem = UITabBarItem(
+            title: "Timeline",
+            image: UIImage(named: sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""),
+            selectedImage: nil
+        )
+
         let viewController = sender.selectedSegmentIndex == 0
             ? localTimelineTableViewController
             : federatedTimelineTableViewController
