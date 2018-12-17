@@ -9,7 +9,7 @@ protocol Then: AnyObject {}
 
 extension Then {
     func then(_ closure: (Self) throws -> Void) rethrows -> Self {
-        closure(self)
+        try closure(self)
         return self
     }
 }
