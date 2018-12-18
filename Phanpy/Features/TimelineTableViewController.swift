@@ -125,12 +125,7 @@ extension TimelineTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            guard
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-                    as? StatusTableViewCell
-                else {
-                    fatalError()
-            }
+            let cell: StatusTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.status = statuses[indexPath.row]
             return cell
 
