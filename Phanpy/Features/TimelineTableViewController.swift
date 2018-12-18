@@ -24,7 +24,7 @@ final class TimelineTableViewController: UIViewController {
             refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
             return refreshControl
         }()
-        $0.register(StatusTableViewCell.self, forCellReuseIdentifier: "cell")
+        StatusTableViewCellReuseIdentifier.register(for: $0)
     }
 
     private var isLoadingMore = false
@@ -125,8 +125,12 @@ extension TimelineTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell: StatusTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            cell.status = statuses[indexPath.row]
+            let status = statuses[indexPath.row]
+            let cell: StatusBindableTableViewCell = tableView.dequeueReusableCell(
+                withIdentifier: StatusTableViewCellReuseIdentifier(status: status).rawValue,
+                for: indexPath
+            )
+            cell.bind(status)
             return cell
 
         default:

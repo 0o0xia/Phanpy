@@ -8,6 +8,96 @@
 import MastodonKit
 import UIKit
 
+enum StatusTableViewCellReuseIdentifier: String {
+    case `default` = "StatusTableViewCell.default"
+    case previewImage = "StatusTableViewCell.previewImage"
+
+    init(status: Status) {
+        if status.mediaAttachments.isEmpty {
+            self = .default
+        } else {
+            self = .previewImage
+        }
+    }
+}
+
+extension StatusTableViewCellReuseIdentifier {
+    static func register(for tableView: UITableView) {
+        tableView.register(DefaultStatusTableViewCell.self, forCellReuseIdentifier: self.default.rawValue)
+        tableView.register(PreviewImageStatusTableViewCell.self, forCellReuseIdentifier: self.previewImage.rawValue)
+    }
+}
+
+// MARK: -
+
+fileprivate final class DefaultStatusTableViewCell: TableViewCell, StatusBindable {
+    private let statusView = StatusView()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        statusView.do {
+            contentView.addSubview($0)
+            NSLayoutConstraint.activate([
+                $0.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
+                $0.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
+                $0.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
+                $0.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
+            ])
+        }
+    }
+
+    func bind(_ status: Status) {
+        statusView.status = status
+    }
+}
+
+// MARK: -
+
+fileprivate final class PreviewImageStatusTableViewCell: TableViewCell, StatusBindable {
+    private let statusView = StatusView()
+
+    private let previewImageView = UIImageView().then {
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFill
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        statusView.do {
+            contentView.addSubview($0)
+            NSLayoutConstraint.activate([
+                $0.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
+                $0.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
+                $0.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
+            ])
+        }
+        previewImageView.do {
+            contentView.addSubview($0)
+            NSLayoutConstraint.activate([
+                $0.heightAnchor.constraint(equalTo: $0.widthAnchor, multiplier: 9.0 / 16.0),
+                $0.leadingAnchor.constraint(equalTo: statusView.contentTextView.leadingAnchor),
+                $0.trailingAnchor.constraint(equalTo: statusView.trailingAnchor),
+                $0.topAnchor.constraint(equalTo: statusView.bottomAnchor),
+                $0.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
+            ])
+        }
+    }
+
+    func bind(_ status: Status) {
+        guard let attachment = status.mediaAttachments.first else {
+            fatalError()
+        }
+
+        statusView.status = status
+        previewImageView.kf.setImage(with: URL(string: attachment.previewURL))
+    }
+}
+
+// MARK: -
+
 fileprivate final class StatusContentTextView: UITextView {
     override var canBecomeFirstResponder: Bool {
         return false
@@ -87,7 +177,7 @@ fileprivate final class StatusView: UIView {
         $0.setContentHuggingPriority(.required, for: .horizontal)
     }
 
-    private let contentTextView = StatusContentTextView().then {
+    let contentTextView = StatusContentTextView().then {
         $0.isEditable = false
         $0.isScrollEnabled = false
         $0.textContainer.lineFragmentPadding = 0
@@ -144,37 +234,6 @@ fileprivate final class StatusView: UIView {
             ])
         }
     }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError()
-    }
-}
-
-final class StatusTableViewCell: UITableViewCell {
-    var status: Status? {
-        didSet {
-            statusView.status = status
-        }
-    }
-
-    private let statusView = StatusView()
-
-    // MARK: -
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(statusView)
-        statusView.do {
-            NSLayoutConstraint.activate([
-                $0.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
-                $0.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
-                $0.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
-                $0.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
-            ])
-        }
-    }
-
-    // MARK: -
 
     required init?(coder aDecoder: NSCoder) {
         fatalError()
