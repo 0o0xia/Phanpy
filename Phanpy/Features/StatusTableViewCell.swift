@@ -8,7 +8,35 @@
 import MastodonKit
 import UIKit
 
-final class StatusTableViewCell: UITableViewCell {
+fileprivate final class StatusContentTextView: UITextView {
+    override var canBecomeFirstResponder: Bool {
+        return false
+    }
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        var location = point
+        location.x -= textContainerInset.left
+        location.y -= textContainerInset.top
+
+        let characterIndex = layoutManager.characterIndex(
+            for: location,
+            in: textContainer,
+            fractionOfDistanceBetweenInsertionPoints: nil
+        )
+
+        guard characterIndex >= 0 && characterIndex < textStorage.length else {
+            return nil
+        }
+
+        if textStorage.attribute(.link, at: characterIndex, effectiveRange: nil) == nil {
+            return nil
+        } else {
+            return self
+        }
+    }
+}
+
+fileprivate final class StatusView: UIView {
     var status: Status? {
         didSet {
             guard let status = status else {
@@ -39,11 +67,10 @@ final class StatusTableViewCell: UITableViewCell {
         }
     }
 
-    // MARK: -
-
     private let avatarImageView = UIImageView().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 25
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private let nameLabel = UILabel().then {
@@ -60,7 +87,7 @@ final class StatusTableViewCell: UITableViewCell {
         $0.setContentHuggingPriority(.required, for: .horizontal)
     }
 
-    private let contentTextView = ContentTextView().then {
+    private let contentTextView = StatusContentTextView().then {
         $0.isEditable = false
         $0.isScrollEnabled = false
         $0.textContainer.lineFragmentPadding = 0
@@ -69,83 +96,87 @@ final class StatusTableViewCell: UITableViewCell {
         $0.setContentHuggingPriority(.required, for: .vertical)
     }
 
-    // MARK: -
+    override init(frame: CGRect) {
+        super.init(frame: frame)
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        translatesAutoresizingMaskIntoConstraints = false
 
-        contentView.addSubview(avatarImageView)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(timeLabel)
-        contentView.addSubview(contentTextView)
+        addSubview(avatarImageView)
+        addSubview(nameLabel)
+        addSubview(timeLabel)
+        addSubview(contentTextView)
 
         setUpConstraints()
     }
 
     private func setUpConstraints() {
-        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            avatarImageView.widthAnchor.constraint(equalToConstant: avatarImageView.layer.cornerRadius * 2),
-            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
-            avatarImageView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
-            avatarImageView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
-            avatarImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.layoutMarginsGuide.bottomAnchor),
-        ])
-        NSLayoutConstraint.activate([
-            nameLabel.leadingAnchor.constraint(
-                equalToSystemSpacingAfter: avatarImageView.trailingAnchor,
-                multiplier: 1
-            ),
-            nameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor),
-        ])
-        NSLayoutConstraint.activate([
-            timeLabel.firstBaselineAnchor.constraint(equalTo: nameLabel.firstBaselineAnchor),
-            timeLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
-            timeLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
-        ])
-        NSLayoutConstraint.activate([
-            contentTextView.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            contentTextView.trailingAnchor.constraint(equalTo: timeLabel.trailingAnchor),
-            contentTextView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
-            contentTextView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.layoutMarginsGuide.bottomAnchor),
-        ])
+        avatarImageView.do {
+            NSLayoutConstraint.activate([
+                $0.widthAnchor.constraint(equalToConstant: $0.layer.cornerRadius * 2),
+                $0.heightAnchor.constraint(equalTo: $0.widthAnchor),
+                $0.leadingAnchor.constraint(equalTo: leadingAnchor),
+                $0.topAnchor.constraint(equalTo: topAnchor),
+                $0.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
+            ])
+        }
+        nameLabel.do {
+            NSLayoutConstraint.activate([
+                $0.leadingAnchor.constraint(
+                    equalToSystemSpacingAfter: avatarImageView.trailingAnchor,
+                    multiplier: 1
+                ),
+                $0.topAnchor.constraint(equalTo: avatarImageView.topAnchor),
+            ])
+        }
+        timeLabel.do {
+            NSLayoutConstraint.activate([
+                $0.firstBaselineAnchor.constraint(equalTo: nameLabel.firstBaselineAnchor),
+                $0.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
+                $0.trailingAnchor.constraint(equalTo: trailingAnchor),
+            ])
+        }
+        contentTextView.do {
+            NSLayoutConstraint.activate([
+                $0.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+                $0.trailingAnchor.constraint(equalTo: timeLabel.trailingAnchor),
+                $0.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
+                $0.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
+            ])
+        }
     }
-
-    // MARK: -
 
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
 }
 
-// MARK: - StatusTableViewCell.ContentTextView
-
-extension StatusTableViewCell {
-    private final class ContentTextView: UITextView {
-        override var canBecomeFirstResponder: Bool {
-            return false
+final class StatusTableViewCell: UITableViewCell {
+    var status: Status? {
+        didSet {
+            statusView.status = status
         }
+    }
 
-        override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-            var location = point
-            location.x -= textContainerInset.left
-            location.y -= textContainerInset.top
+    private let statusView = StatusView()
 
-            let characterIndex = layoutManager.characterIndex(
-                for: location,
-                in: textContainer,
-                fractionOfDistanceBetweenInsertionPoints: nil
-            )
+    // MARK: -
 
-            guard characterIndex >= 0 && characterIndex < textStorage.length else {
-                return nil
-            }
-
-            if textStorage.attribute(.link, at: characterIndex, effectiveRange: nil) == nil {
-                return nil
-            } else {
-                return self
-            }
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(statusView)
+        statusView.do {
+            NSLayoutConstraint.activate([
+                $0.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
+                $0.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
+                $0.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
+                $0.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
+            ])
         }
+    }
+
+    // MARK: -
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError()
     }
 }
