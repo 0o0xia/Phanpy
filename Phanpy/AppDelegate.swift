@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ]
             return tabBarController
         }()
+        window?.tintColor = UIColor(red: 88/255, green: 86/255, blue: 214/255, alpha: 1)
         window?.makeKeyAndVisible()
         return true
     }
