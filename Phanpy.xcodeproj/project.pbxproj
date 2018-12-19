@@ -106,7 +106,6 @@
 			children = (
 				8C92674B21C966FA004620BD /* Status */,
 				8C7382A921BFAD540017AE77 /* TimelineTableViewController.swift */,
-				8C80AA6621BC2A6600F02B8A /* StatusContentParser.swift */,
 				8C7382AB21BFB0F20017AE77 /* HomeViewController.swift */,
 				8C4F63BA21C6D41A007917FC /* TimelineViewController.swift */,
 			);
@@ -117,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				8C92674C21C96708004620BD /* StatusBindable.swift */,
+				8C80AA6621BC2A6600F02B8A /* StatusContentParser.swift */,
 				8CD7BE4121BC0F9D00C993C9 /* StatusTableViewCell.swift */,
 			);
 			path = Status;
