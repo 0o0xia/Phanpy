@@ -33,6 +33,8 @@ extension StatusTableViewCellReuseIdentifier {
 fileprivate final class DefaultStatusTableViewCell: TableViewCell, StatusBindable {
     private let statusView = StatusView()
 
+    private let actionsView = StatusActionsView()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -42,6 +44,15 @@ fileprivate final class DefaultStatusTableViewCell: TableViewCell, StatusBindabl
                 $0.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
                 $0.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
                 $0.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
+            ])
+        }
+
+        actionsView.do {
+            contentView.addSubview($0)
+            NSLayoutConstraint.activate([
+                $0.leadingAnchor.constraint(equalTo: statusView.contentTextView.leadingAnchor),
+                $0.trailingAnchor.constraint(equalTo: statusView.trailingAnchor),
+                $0.topAnchor.constraint(equalTo: statusView.bottomAnchor),
                 $0.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
             ])
         }
@@ -281,6 +292,46 @@ fileprivate final class StatusContentTextView: UITextView {
             return nil
         } else {
             return self
+        }
+    }
+}
+
+// MARK: -
+
+fileprivate final class StatusActionsView: View {
+    let replyButton = UIButton(type: .system).then {
+        $0.contentHorizontalAlignment = .leading
+        $0.setTitle("Reply", for: .normal)
+    }
+
+    let boostButton = UIButton(type: .system).then {
+        $0.contentHorizontalAlignment = .leading
+        $0.setTitle("Boost", for: .normal)
+    }
+
+    let favoriteButton = UIButton(type: .system).then {
+        $0.contentHorizontalAlignment = .leading
+        $0.setTitle("Favorite", for: .normal)
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        translatesAutoresizingMaskIntoConstraints = false
+
+        UIStackView(arrangedSubviews: [replyButton, boostButton, favoriteButton]).do {
+            $0.alignment = .firstBaseline
+            $0.axis = .horizontal
+            $0.distribution = .fillProportionally
+            $0.translatesAutoresizingMaskIntoConstraints = false
+
+            addSubview($0)
+            NSLayoutConstraint.activate([
+                $0.leadingAnchor.constraint(equalTo: leadingAnchor),
+                $0.trailingAnchor.constraint(equalTo: trailingAnchor),
+                $0.topAnchor.constraint(equalTo: topAnchor),
+                $0.bottomAnchor.constraint(equalTo: bottomAnchor),
+            ])
         }
     }
 }
