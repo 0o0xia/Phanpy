@@ -150,17 +150,22 @@ extension TimelineTableViewController: UITableViewDataSource {
     }
 }
 
+import SafariServices
+
 extension TimelineTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard indexPath.section == 0 else {
-            return
-        }
 
-        let textView = UITextView()
-        textView.text = statuses[indexPath.row].content
-        let viewController = UIViewController()
-        viewController.view = textView
-        navigationController?.pushViewController(viewController, animated: true)
+        switch indexPath.section {
+        case 0:
+            let status = statuses[indexPath.row]
+            guard let url = status.reblog?.url ?? status.url else {
+                break
+            }
+            let safariViewController = SFSafariViewController(url: url)
+            present(safariViewController, animated: true)
+        default:
+            loadMoreIfNeeded()
+        }
     }
 }
