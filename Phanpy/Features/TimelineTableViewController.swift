@@ -159,7 +159,7 @@ extension TimelineTableViewController: UITableViewDelegate {
         switch indexPath.section {
         case 0:
             let status = statuses[indexPath.row]
-            guard let url = status.reblog?.url ?? status.url else {
+            guard let url = status.url else {
                 break
             }
             let safariViewController = SFSafariViewController(url: url)

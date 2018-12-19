@@ -13,7 +13,7 @@ enum StatusTableViewCellReuseIdentifier: String {
     case previewImage = "StatusTableViewCell.previewImage"
 
     init(status: Status) {
-        if status.mediaAttachments.isEmpty {
+        if status.reblog?.mediaAttachments.isEmpty != false && status.mediaAttachments.isEmpty {
             self = .default
         } else {
             self = .previewImage
@@ -48,7 +48,7 @@ fileprivate final class DefaultStatusTableViewCell: TableViewCell, StatusBindabl
     }
 
     func bind(_ status: Status) {
-        statusView.status = status
+        statusView.bind(status)
     }
 }
 
@@ -87,74 +87,28 @@ fileprivate final class PreviewImageStatusTableViewCell: TableViewCell, StatusBi
     }
 
     func bind(_ status: Status) {
-        guard let attachment = status.mediaAttachments.first else {
+        guard let attachment = status.reblog?.mediaAttachments.first ?? status.mediaAttachments.first else {
             fatalError()
         }
 
-        statusView.status = status
+        statusView.bind(status)
         previewImageView.kf.setImage(with: URL(string: attachment.previewURL))
     }
 }
 
 // MARK: -
 
-fileprivate final class StatusContentTextView: UITextView {
-    override var canBecomeFirstResponder: Bool {
-        return false
+fileprivate final class StatusView: UIView, StatusBindable {
+    private let boostedImageView = UIImageView().then {
+        $0.image = UIImage(named: "Boost")?.withRenderingMode(.alwaysTemplate)
+        $0.tintColor = .gray
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        var location = point
-        location.x -= textContainerInset.left
-        location.y -= textContainerInset.top
-
-        let characterIndex = layoutManager.characterIndex(
-            for: location,
-            in: textContainer,
-            fractionOfDistanceBetweenInsertionPoints: nil
-        )
-
-        guard characterIndex >= 0 && characterIndex < textStorage.length else {
-            return nil
-        }
-
-        if textStorage.attribute(.link, at: characterIndex, effectiveRange: nil) == nil {
-            return nil
-        } else {
-            return self
-        }
-    }
-}
-
-fileprivate final class StatusView: UIView {
-    var status: Status? {
-        didSet {
-            guard let status = status else {
-                return
-            }
-
-            avatarImageView.kf.setImage(with: URL(string: status.account.avatarStatic))
-            nameLabel.attributedText = {
-                let attributedString = NSMutableAttributedString()
-                if !status.account.displayName.isEmpty {
-                    attributedString.append(NSAttributedString(
-                        string: status.account.displayName,
-                        attributes: [.font: UIFont.preferredFont(forTextStyle: .headline)]
-                    ))
-                    attributedString.append(NSAttributedString(string: " "))
-                }
-                attributedString.append(NSAttributedString(
-                    string: "@\(status.account.acct)",
-                    attributes: [
-                        .font: UIFont.preferredFont(forTextStyle: .subheadline),
-                        .foregroundColor: UIColor.gray,
-                    ]
-                ))
-                return attributedString
-            }()
-            timeLabel.text = status.createdAt.shortTimeAgoSinceNow
-            contentTextView.attributedText = StatusContentParser(content: status.content).parse()
-        }
+    private let boostedLabel = UILabel().then {
+        $0.font = .preferredFont(forTextStyle: .subheadline)
+        $0.textColor = .gray
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private let avatarImageView = UIImageView().then {
@@ -186,11 +140,16 @@ fileprivate final class StatusView: UIView {
         $0.setContentHuggingPriority(.required, for: .vertical)
     }
 
+    private var boostedConstraints: [NSLayoutConstraint] = []
+    private var noBoostedConstraints: [NSLayoutConstraint] = []
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         translatesAutoresizingMaskIntoConstraints = false
 
+        addSubview(boostedImageView)
+        addSubview(boostedLabel)
         addSubview(avatarImageView)
         addSubview(nameLabel)
         addSubview(timeLabel)
@@ -200,14 +159,30 @@ fileprivate final class StatusView: UIView {
     }
 
     private func setUpConstraints() {
+        boostedImageView.do {
+            NSLayoutConstraint.activate([
+                $0.topAnchor.constraint(equalTo: topAnchor),
+            ])
+        }
+        boostedLabel.do {
+            NSLayoutConstraint.activate([
+                $0.leadingAnchor.constraint(equalToSystemSpacingAfter: boostedImageView.trailingAnchor, multiplier: 1),
+                $0.trailingAnchor.constraint(equalTo: trailingAnchor),
+                $0.topAnchor.constraint(equalTo: topAnchor),
+            ])
+        }
         avatarImageView.do {
             NSLayoutConstraint.activate([
                 $0.widthAnchor.constraint(equalToConstant: $0.layer.cornerRadius * 2),
                 $0.heightAnchor.constraint(equalTo: $0.widthAnchor),
                 $0.leadingAnchor.constraint(equalTo: leadingAnchor),
-                $0.topAnchor.constraint(equalTo: topAnchor),
+                $0.trailingAnchor.constraint(equalTo: boostedImageView.trailingAnchor),
                 $0.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
             ])
+            boostedConstraints.append(
+                $0.topAnchor.constraint(equalToSystemSpacingBelow: boostedImageView.bottomAnchor, multiplier: 1)
+            )
+            noBoostedConstraints.append($0.topAnchor.constraint(equalTo: topAnchor))
         }
         nameLabel.do {
             NSLayoutConstraint.activate([
@@ -235,7 +210,77 @@ fileprivate final class StatusView: UIView {
         }
     }
 
+    func bind(_ status: Status) {
+        if let reblog = status.reblog {
+            boostedImageView.isHidden = false
+            boostedLabel.isHidden = false
+            boostedLabel.text = "\(status.account.displayName) boosted"
+            NSLayoutConstraint.activate(boostedConstraints)
+            NSLayoutConstraint.deactivate(noBoostedConstraints)
+
+            avatarImageView.kf.setImage(with: URL(string: reblog.account.avatarStatic))
+        } else {
+            boostedImageView.isHidden = true
+            boostedLabel.isHidden = true
+            NSLayoutConstraint.activate(noBoostedConstraints)
+            NSLayoutConstraint.deactivate(boostedConstraints)
+
+            avatarImageView.kf.setImage(with: URL(string: status.account.avatarStatic))
+        }
+        nameLabel.attributedText = {
+            let status = status.reblog ?? status
+            let attributedString = NSMutableAttributedString()
+            if !status.account.displayName.isEmpty {
+                attributedString.append(NSAttributedString(
+                    string: status.account.displayName,
+                    attributes: [.font: UIFont.preferredFont(forTextStyle: .headline)]
+                ))
+                attributedString.append(NSAttributedString(string: " "))
+            }
+            attributedString.append(NSAttributedString(
+                string: "@\(status.account.acct)",
+                attributes: [
+                    .font: UIFont.preferredFont(forTextStyle: .subheadline),
+                    .foregroundColor: UIColor.gray,
+                ]
+            ))
+            return attributedString
+        }()
+        timeLabel.text = status.createdAt.shortTimeAgoSinceNow
+        contentTextView.attributedText = StatusContentParser(content: status.content).parse()
+    }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError()
+    }
+}
+
+// MARK: -
+
+fileprivate final class StatusContentTextView: UITextView {
+    override var canBecomeFirstResponder: Bool {
+        return false
+    }
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        var location = point
+        location.x -= textContainerInset.left
+        location.y -= textContainerInset.top
+
+        let characterIndex = layoutManager.characterIndex(
+            for: location,
+            in: textContainer,
+            fractionOfDistanceBetweenInsertionPoints: nil
+        )
+
+        guard characterIndex >= 0 && characterIndex < textStorage.length else {
+            return nil
+        }
+
+        if textStorage.attribute(.link, at: characterIndex, effectiveRange: nil) == nil {
+            return nil
+        } else {
+            return self
+        }
     }
 }
