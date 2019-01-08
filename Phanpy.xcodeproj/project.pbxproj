@@ -26,6 +26,14 @@
 		8CD7BE2321BBFA1E00C993C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7BE2221BBFA1E00C993C9 /* Assets.xcassets */; };
 		8CD7BE2621BBFA1E00C993C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7BE2421BBFA1E00C993C9 /* LaunchScreen.storyboard */; };
 		8CD7BE4321BC0F9D00C993C9 /* StatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7BE4121BC0F9D00C993C9 /* StatusTableViewCell.swift */; };
+		920983D821D35E130087311C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920983D721D35E130087311C /* SettingsTableViewController.swift */; };
+		9217651321D4C816006089B7 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217651221D4C816006089B7 /* SettingCell.swift */; };
+		92182AF321E480CF00A10796 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92182AF221E480CF00A10796 /* Color.swift */; };
+		927B1B1B21D3734500D8CF46 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1B1A21D3734500D8CF46 /* UIImage.swift */; };
+		927B1B1D21D382D200D8CF46 /* ThemeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1B1C21D382D200D8CF46 /* ThemeSettingsViewController.swift */; };
+		92C64F0621D5FCD600E4FB41 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C64F0521D5FCD600E4FB41 /* Setting.swift */; };
+		92C64F0821D604FB00E4FB41 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C64F0721D604FB00E4FB41 /* SettingsManager.swift */; };
+		92CAB28C21D354CD00FACD10 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CAB28B21D354CD00FACD10 /* SettingsViewController.swift */; };
 		F75C6F77CC1FB97C20188F5D /* Pods_Phanpy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A783EADD95F3254958F06902 /* Pods_Phanpy.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +75,14 @@
 		8CD7BE2C21BBFA1E00C993C9 /* PhanpyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhanpyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CD7BE3221BBFA1E00C993C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CD7BE4121BC0F9D00C993C9 /* StatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewCell.swift; sourceTree = "<group>"; };
+		920983D721D35E130087311C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		9217651221D4C816006089B7 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		92182AF221E480CF00A10796 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		927B1B1A21D3734500D8CF46 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		927B1B1C21D382D200D8CF46 /* ThemeSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsViewController.swift; sourceTree = "<group>"; };
+		92C64F0521D5FCD600E4FB41 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		92C64F0721D604FB00E4FB41 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		92CAB28B21D354CD00FACD10 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A783EADD95F3254958F06902 /* Pods_Phanpy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Phanpy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -105,6 +121,7 @@
 		8C4F63B921C6CCBE007917FC /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				927B1B1921D36B2A00D8CF46 /* Settings */,
 				8C92674B21C966FA004620BD /* Status */,
 				8C7382A921BFAD540017AE77 /* TimelineTableViewController.swift */,
 				8C7382AB21BFB0F20017AE77 /* HomeViewController.swift */,
@@ -129,6 +146,7 @@
 				8CA37C5C21CA64000035C167 /* View.swift */,
 				8C92674E21C96B50004620BD /* TableViewCell.swift */,
 				8C9A721F21C80B7F00118C1C /* UITableView.swift */,
+				927B1B1A21D3734500D8CF46 /* UIImage.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -174,6 +192,20 @@
 				8CD7BE3221BBFA1E00C993C9 /* Info.plist */,
 			);
 			path = PhanpyTests;
+			sourceTree = "<group>";
+		};
+		927B1B1921D36B2A00D8CF46 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				920983D721D35E130087311C /* SettingsTableViewController.swift */,
+				92CAB28B21D354CD00FACD10 /* SettingsViewController.swift */,
+				927B1B1C21D382D200D8CF46 /* ThemeSettingsViewController.swift */,
+				9217651221D4C816006089B7 /* SettingCell.swift */,
+				92C64F0521D5FCD600E4FB41 /* Setting.swift */,
+				92C64F0721D604FB00E4FB41 /* SettingsManager.swift */,
+				92182AF221E480CF00A10796 /* Color.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		D44D70FDD3493E2085CC74B4 /* Frameworks */ = {
@@ -392,12 +424,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C4F63BD21C7631C007917FC /* DateTools.swift in Sources */,
+				927B1B1D21D382D200D8CF46 /* ThemeSettingsViewController.swift in Sources */,
+				92182AF321E480CF00A10796 /* Color.swift in Sources */,
+				927B1B1B21D3734500D8CF46 /* UIImage.swift in Sources */,
 				8CD31A8121C12F8F001FED0E /* main.swift in Sources */,
 				8CA37C5D21CA64000035C167 /* View.swift in Sources */,
 				8CD7BE4321BC0F9D00C993C9 /* StatusTableViewCell.swift in Sources */,
 				8CCA015B21C7DAA7007A2C37 /* Do.swift in Sources */,
 				8C92674D21C96708004620BD /* StatusBindable.swift in Sources */,
+				920983D821D35E130087311C /* SettingsTableViewController.swift in Sources */,
 				8C92674F21C96B50004620BD /* TableViewCell.swift in Sources */,
+				92CAB28C21D354CD00FACD10 /* SettingsViewController.swift in Sources */,
+				92C64F0621D5FCD600E4FB41 /* Setting.swift in Sources */,
 				8C4F63B321C69B53007917FC /* Kingfisher.swift in Sources */,
 				8C9A722021C80B7F00118C1C /* UITableView.swift in Sources */,
 				8C80AA6721BC2A6600F02B8A /* StatusContentParser.swift in Sources */,
@@ -405,6 +443,8 @@
 				8C7382AA21BFAD540017AE77 /* TimelineTableViewController.swift in Sources */,
 				8C4F63B521C69B61007917FC /* Then.swift in Sources */,
 				8C7382AC21BFB0F20017AE77 /* HomeViewController.swift in Sources */,
+				9217651321D4C816006089B7 /* SettingCell.swift in Sources */,
+				92C64F0821D604FB00E4FB41 /* SettingsManager.swift in Sources */,
 				8C4F63BB21C6D41A007917FC /* TimelineViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

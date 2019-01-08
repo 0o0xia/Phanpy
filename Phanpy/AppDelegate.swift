@@ -36,10 +36,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         selectedImage: nil
                     )
                 }),
+                UINavigationController(rootViewController: SettingsViewController().then {
+                    $0.title = "Settings"
+                    $0.tabBarItem = UITabBarItem(
+                        title: "Settings",
+                        image: UIImage(named: "Settings"),
+                        selectedImage: nil
+                    )
+                }),
             ]
             return tabBarController
         }()
-        window?.tintColor = UIColor(red: 88/255, green: 86/255, blue: 214/255, alpha: 1)
+
+        SettingsManager.shared.register { [weak self] color in
+            self?.window?.tintColor = color
+        }
+
         window?.makeKeyAndVisible()
         return true
     }
