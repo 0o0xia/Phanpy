@@ -48,9 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return tabBarController
         }()
 
-        SettingsManager.shared.register { [weak self] color in
-            self?.window?.tintColor = color
-        }
+        window?.tintColor = AppSettings.shared.themeColor
 
         window?.makeKeyAndVisible()
         return true

@@ -8,14 +8,16 @@
 import UIKit
 
 extension UIImage {
-    convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
-        let rect = CGRect(origin: .zero, size: size)
-        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
-        color.setFill()
-        UIRectFill(rect)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        guard let cgImage = image?.cgImage else { return nil }
-        self.init(cgImage: cgImage)
+    static func cornerImage(color: UIColor, size: CGSize = .zero, cornerRadius: CGFloat) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(size: size)
+        let bounds = CGRect(origin: .zero, size: size)
+        let image = renderer.image { (context) in
+            color.setFill()
+            let path = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
+            path.addClip()
+            context.cgContext.addPath(path.cgPath)
+            context.fill(bounds)
+        }
+        return image
     }
 }

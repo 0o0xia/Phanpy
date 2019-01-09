@@ -7,22 +7,19 @@
 
 import UIKit
 
-protocol Settingable {
+protocol SettingItem {
     var title: String { get }
     var icon: UIImage? { get }
-    var type: SettingType { get }
-    var selectedHandler: ((Settingable, SettingCellable) -> Void)? { get }
+    var selectedHandler: ((SettingItem) -> Void)? { get }
 }
 
-struct Setting: Settingable {
+struct Setting: SettingItem {
     var title: String
     var icon: UIImage?
-    var type: SettingType
-    var selectedHandler: ((Settingable, SettingCellable) -> Void)?
+    var selectedHandler: ((SettingItem) -> Void)?
 
-    init(title: String, type: SettingType, icon: UIImage?) {
+    init(title: String, icon: UIImage?) {
         self.title = title
-        self.type = type
         self.icon = icon
     }
 }

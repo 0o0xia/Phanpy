@@ -7,18 +7,9 @@
 
 import UIKit
 
-enum SettingType: String {
-    case `default` = "setting.type.default"
-    case indicator = "setting.type.indicatort"
-    case checkmark = "setting.type.checkmark"
-}
-
-protocol SettingCellable: AnyObject {
-}
-
 class SettingsTableViewController: UIViewController {
 
-    private var settings = [[Settingable]]()
+    private var settings = [[SettingItem]]()
     private lazy var tableView = UITableView(frame: .zero, style: .grouped).then {
         $0.dataSource = self
         $0.delegate = self
@@ -34,14 +25,10 @@ class SettingsTableViewController: UIViewController {
 
     override func loadView() {
         view = tableView
-        register([
-            .default: SettingCell.self,
-            .indicator: IndicatorSettingCell.self,
-            .checkmark: CheckSettingCell.self,
-            ])
+        register([ "SettingCell": UITableViewCell.self ])
     }
 
-    final func reloadData(_ data: [[Settingable]]) {
+    final func reloadData(_ data: [[SettingItem]]) {
         settings.removeAll()
         data.forEach { self.settings.append($0) }
         tableView.reloadData()
@@ -51,9 +38,9 @@ class SettingsTableViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    final func register(_ cellClasses: [SettingType: SettingCellable.Type]?) {
+    final func register(_ cellClasses: [String: UITableViewCell.Type]?) {
         cellClasses?.forEach {
-            tableView.register($0.value, forCellReuseIdentifier: $0.key.rawValue)
+            tableView.register($0.value, forCellReuseIdentifier: $0.key)
         }
     }
 
@@ -65,12 +52,8 @@ class SettingsTableViewController: UIViewController {
 extension SettingsTableViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell: SettingCellable = tableView.cellForRow(at: indexPath) as? SettingCellable else {
-            return
-        }
-
         let setting = settings[indexPath.section][indexPath.row]
-        setting.selectedHandler?(setting, cell)
+        setting.selectedHandler?(setting)
     }
 
 }
@@ -78,13 +61,11 @@ extension SettingsTableViewController: UITableViewDelegate {
 extension SettingsTableViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let setting = settings[indexPath.section][indexPath.row]
-
-        let cell: SettingCell = tableView.dequeueReusableCell(withIdentifier: setting.type.rawValue,
-                                                              for: indexPath)
-        cell.bind(setting)
-
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "SettingCell",
+                                                                  for: indexPath)
+        cell.imageView?.image = setting.icon
+        cell.textLabel?.text = setting.title
         return cell
     }
 

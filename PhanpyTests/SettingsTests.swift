@@ -12,54 +12,23 @@ final class SettingsTests: XCTestCase {}
 
 // MARK: SettingsManager
 extension SettingsTests {
+    func testThemeColor() {
+        UserDefaults.standard.set("Default", forKey: "AppSettings.themeColorKey")
+        let color = AppSettings.shared.themeColor
+        XCTAssertEqual(color, UIColor(red: 88/255, green: 86/255, blue: 214/255, alpha: 1))
 
-    func testInit0() {
-        UserDefaults.standard.set("test",
-                                  forKey: "SettingsManager.themeColorKey")
-        UserDefaults.standard.synchronize()
-        XCTAssertEqual(SettingsManager.shared.themeColorType, .default)
+        AppSettings.shared.changeThemeColor(to: "Orange")
+        XCTAssertEqual(AppSettings.shared.themeColor, UIColor(red: 255/255, green: 149/255, blue: 0/255, alpha: 1))
     }
-
-    func testInit1() {
-        UserDefaults.standard.set(nil,
-                                  forKey: "SettingsManager.themeColorKey")
-        UserDefaults.standard.synchronize()
-        XCTAssertEqual(SettingsManager.shared.themeColorType, .default)
-    }
-
-    func testChangeColor() {
-        SettingsManager.shared.changeThemeColor(.orange)
-        let color = SettingsManager.shared.themeColor
-        XCTAssertEqual(color.type, .orange)
-    }
-
-    func testChangeColor1() {
-        SettingsManager.shared.changeThemeColor(.orange)
-        SettingsManager.shared.changeThemeColor(.default)
-        let defaultColor = SettingsManager.shared.themeColor
-        XCTAssertEqual(defaultColor.type, .default)
-    }
-
-    func testRegister() {
-        SettingsManager.shared.changeThemeColor(.green)
-        SettingsManager.shared.register { (color) in
-            XCTAssertEqual(color, Color.green.color)
-        }
-    }
-
 }
 
 // MARK: Models
 extension SettingsTests {
-
     func testModels() {
-        let icon = UIImage(color: .orange,
-                           size: CGSize(width: 29, height: 29))
+        let icon = UIImage.cornerImage(color: .orange, size: CGSize(width: 29, height: 29), cornerRadius: 7)
         let setting = Setting(title: "color",
-                              type: .checkmark,
                               icon: icon)
         XCTAssertEqual(setting.title, "color")
-        XCTAssertEqual(setting.type, .checkmark)
         XCTAssertEqual(setting.icon, icon)
     }
 }
