@@ -29,9 +29,9 @@ final class SettingsManager {
         }
     }
     private var colorChangeHandlers = [(UIColor) -> Void]()
-    init() {
-        if let colorKey = UserDefaults.standard.string(forKey: SettingsManager.themeColorKey) {
-            themeColorType = ThemeColorType(rawValue: colorKey) ?? .default
+    private init() {
+        if let colorType = UserDefaults.standard.string(forKey: SettingsManager.themeColorKey) {
+            themeColorType = ThemeColorType(rawValue: colorType) ?? .default
             themeColor = themeColor(withType: themeColorType)
         }
     }
@@ -82,5 +82,5 @@ extension SettingsManager {
 
 // MARK: Keys
 extension SettingsManager {
-    static let themeColorKey = "SettingsManager.themeColorKey"
+    private static let themeColorKey = "SettingsManager.themeColorKey"
 }

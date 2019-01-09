@@ -29,6 +29,7 @@
 		920983D821D35E130087311C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920983D721D35E130087311C /* SettingsTableViewController.swift */; };
 		9217651321D4C816006089B7 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217651221D4C816006089B7 /* SettingCell.swift */; };
 		92182AF321E480CF00A10796 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92182AF221E480CF00A10796 /* Color.swift */; };
+		925F90BE21E5F31100DA69E7 /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F90BD21E5F31100DA69E7 /* SettingsTests.swift */; };
 		927B1B1B21D3734500D8CF46 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1B1A21D3734500D8CF46 /* UIImage.swift */; };
 		927B1B1D21D382D200D8CF46 /* ThemeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1B1C21D382D200D8CF46 /* ThemeSettingsViewController.swift */; };
 		92C64F0621D5FCD600E4FB41 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C64F0521D5FCD600E4FB41 /* Setting.swift */; };
@@ -78,6 +79,7 @@
 		920983D721D35E130087311C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		9217651221D4C816006089B7 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		92182AF221E480CF00A10796 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		925F90BD21E5F31100DA69E7 /* SettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTests.swift; sourceTree = "<group>"; };
 		927B1B1A21D3734500D8CF46 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		927B1B1C21D382D200D8CF46 /* ThemeSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsViewController.swift; sourceTree = "<group>"; };
 		92C64F0521D5FCD600E4FB41 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				8C1CF32D21BD1BFB00A66D4E /* StatusContentParserTests.swift */,
+				925F90BD21E5F31100DA69E7 /* SettingsTests.swift */,
 				8CD7BE3221BBFA1E00C993C9 /* Info.plist */,
 			);
 			path = PhanpyTests;
@@ -453,6 +456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				925F90BE21E5F31100DA69E7 /* SettingsTests.swift in Sources */,
 				8C1CF32E21BD1BFB00A66D4E /* StatusContentParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
